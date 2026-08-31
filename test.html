@@ -1,0 +1,1509 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Générateur de bons VTC</title><style>
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --success: #16a34a;
+  --dark: #111827;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --background: #f3f4f6;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
+}
+
+/* HEADER */
+
+header {
+  background: linear-gradient(135deg, #111827, #1f2937);
+  color: white;
+  padding: 24px 15px;
+  text-align: center;
+}
+
+header .logo {
+  font-size: 38px;
+  margin-bottom: 5px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+header p {
+  margin: 7px 0 0;
+  opacity: .75;
+  font-size: 14px;
+}
+
+/* CONTENEUR */
+
+.container {
+  max-width: 760px;
+  margin: auto;
+  padding: 20px 15px 40px;
+}
+
+/* CARTES */
+
+.card {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.07);
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.card-title .icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #eff6ff;
+  font-size: 20px;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.card-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+/* FORMULAIRE */
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 14px 0 6px;
+}
+
+input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: .2s;
+  background: #fff;
+}
+
+input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}
+
+/* BOUTONS */
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-radius: 11px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.primary {
+  background: var(--primary);
+  color: white;
+}
+
+.primary:hover {
+  background: var(--primary-dark);
+}
+
+.secondary {
+  background: #f3f4f6;
+  color: var(--dark);
+}
+
+.success {
+  background: var(--success);
+  color: white;
+}
+
+/* STATUS */
+
+.status {
+  padding: 13px 15px;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status.error {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.status.success-status {
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+/* BON */
+
+.bon {
+  position: relative;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  padding: 30px;
+  overflow: hidden;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+  font-size: 44px;
+  color: rgba(220, 38, 38, .11);
+  font-weight: 800;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bon-content {
+  position: relative;
+  z-index: 1;
+}
+
+.bon-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 2px solid var(--dark);
+  padding-bottom: 18px;
+}
+
+.bon-header h2 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+.bon-number {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.bon-date {
+  text-align: right;
+  font-size: 13px;
+}
+
+.section {
+  margin-top: 25px;
+}
+
+.section h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: var(--dark);
+}
+
+.row {
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 9px 0;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.row strong {
+  min-width: 145px;
+  color: #374151;
+}
+
+.row span {
+  flex: 1;
+}
+
+.total {
+  margin-top: 25px;
+  padding-top: 18px;
+  border-top: 2px solid var(--dark);
+  text-align: right;
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.footer-test {
+  margin-top: 25px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 11px;
+}
+
+/* MASQUAGE */
+
+.hidden {
+  display: none !important;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .container {
+    padding: 12px 10px 30px;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 14px;
+  }
+
+  header h1 {
+    font-size: 21px;
+  }
+
+  .bon {
+    padding: 18px;
+  }
+
+  .bon-header {
+    flex-direction: column;
+  }
+
+  .bon-date {
+    text-align: left;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .row strong {
+    min-width: auto;
+  }
+
+  .watermark {
+    font-size: 30px;
+  }
+}
+
+/* IMPRESSION */
+
+@media print {
+
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: white;
+  }
+
+  header,
+  .no-print {
+    display: none !important;
+  }
+
+  .container {
+    max-width: none;
+    padding: 0;
+  }
+
+  .card {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .bon {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+}
+</style></head><body><header>
+  <div class="logo">🚗</div>
+  <h1>Générateur de bons VTC</h1>
+  <p>Création de bons de commande — mode démonstration</p>
+</header><div class="container">  <!-- CHAUFFEUR -->  <div class="card no-print"><div class="card-title">
+  <div class="icon">👤</div>
+  <div>
+    <h2>Informations chauffeur</h2>
+    <div class="card-subtitle">
+      Ces informations sont conservées uniquement dans votre navigateur.
+    </div>
+  </div>
+</div>
+
+<label for="chauffeurNom">Nom / prénom</label>
+<input
+  id="chauffeurNom"
+  type="text"
+  placeholder="Jean Dupont"
+  autocomplete="name"
+>
+
+<label for="entreprise">Entreprise</label>
+<input
+  id="entreprise"
+  type="text"
+  placeholder="Mon entreprise VTC"
+>
+
+<label for="chauffeurTelephone">Téléphone</label>
+<input
+  id="chauffeurTelephone"
+  type="tel"
+  placeholder="06 00 00 00 00"
+  autocomplete="tel"
+>
+
+<label for="chauffeurAdresse">Adresse</label>
+<input
+  id="chauffeurAdresse"
+  type="text"
+  placeholder="Adresse professionnelle"
+>
+
+<label for="siret">SIRET</label>
+<input
+  id="siret"
+  type="text"
+  placeholder="12345678900000"
+>
+
+<label for="immatriculation">Immatriculation</label>
+<input
+  id="immatriculation"
+  type="text"
+  placeholder="AB-123-CD"
+>
+
+<button class="secondary" onclick="saveDriver()">
+  💾 Enregistrer mes informations
+</button>
+
+  </div>  <!-- GENERATION -->  <div class="card no-print"><div class="card-title">
+  <div class="icon">📍</div>
+  <div>
+    <h2>Nouvelle course</h2>
+    <div class="card-subtitle">
+      Génère automatiquement une course fictive autour de votre position.
+    </div>
+  </div>
+</div>
+
+<button
+  id="generateButton"
+  class="primary"
+  onclick="generateCourse()"
+>
+  🚗 Générer une course
+</button>
+
+<div
+  id="status"
+  class="status hidden"
+></div>
+
+  </div>  <!-- RESULTAT -->  <div
+    id="resultCard"
+    class="card hidden"
+  ><div class="bon">
+
+  <div class="watermark">
+    DONNÉES DE TEST
+  </div>
+
+  <div class="bon-content">
+
+    <div class="bon-header">
+
+      <div>
+        <h2>BON DE COMMANDE VTC</h2>
+
+        <div
+          id="bonNumero"
+          class="bon-number"
+        ></div>
+      </div>
+
+      <div
+        id="bonDate"
+        class="bon-date"
+      ></div>
+
+    </div>
+
+
+    <!-- CHAUFFEUR -->
+
+    <div class="section">
+
+      <h3>👤 Chauffeur</h3>
+
+      <div class="row">
+        <strong>Nom :</strong>
+        <span id="bChauffeur"></span>
+      </div>
+
+      <div class="row">
+        <strong>Entreprise :</strong>
+        <span id="bEntreprise"></span>
+      </div>
+
+      <div class="row">
+        <strong>Téléphone :</strong>
+        <span id="bTelephone"></span>
+      </div>
+
+      <div class="row">
+        <strong>Adresse :</strong>
+        <span id="bAdresse"></span>
+      </div>
+
+      <div class="row">
+        <strong>SIRET :</strong>
+        <span id="bSiret"></span>
+      </div>
+
+      <div class="row">
+        <strong>Immatriculation :</strong>
+        <span id="bImmat"></span>
+      </div>
+
+    </div>
+
+
+    <!-- CLIENT -->
+
+    <div class="section">
+
+      <h3>👤 Client</h3>
+
+      <div class="row">
+        <strong>Nom :</strong>
+        <span id="bClient"></span>
+      </div>
+
+      <div class="row">
+        <strong>Téléphone :</strong>
+        <span id="bClientTel"></span>
+      </div>
+
+    </div>
+
+
+    <!-- COURSE -->
+
+    <div class="section">
+
+      <h3>🚗 Course</h3>
+
+      <div class="row">
+        <strong>Départ :</strong>
+        <span id="bDepart"></span>
+      </div>
+
+      <div class="row">
+        <strong>Arrivée :</strong>
+        <span id="bArrivee"></span>
+      </div>
+
+      <div class="row">
+        <strong>Date :</strong>
+        <span id="bCourseDate"></span>
+      </div>
+
+      <div class="row">
+        <strong>Distance :</strong>
+        <span id="bDistance"></span>
+      </div>
+
+      <div class="row">
+        <strong>Durée estimée :</strong>
+        <span id="bDuree"></span>
+      </div>
+
+    </div>
+
+
+    <!-- PRIX -->
+
+    <div class="total">
+      Montant :
+      <span id="bPrix">0.00</span> €
+    </div>
+
+    <div class="footer-test">
+      Document généré à titre de démonstration — données fictives.
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ACTIONS -->
+
+<div class="no-print">
+
+  <button
+    class="success"
+    onclick="window.print()"
+  >
+    📄 Imprimer / enregistrer en PDF
+  </button>
+
+  <button
+    class="primary"
+    onclick="generateCourse()"
+  >
+    🔄 Générer une autre course
+  </button>
+
+</div>
+
+  </div></div><script>
+
+/* =========================
+   DONNÉES FICTIVES
+========================= */
+
+const prenoms = [
+  "Thomas",
+  "Lucas",
+  "Hugo",
+  "Nathan",
+  "Louis",
+  "Gabriel",
+  "Arthur",
+  "Jules",
+  "Maxime",
+  "Antoine",
+  "Emma",
+  "Camille",
+  "Chloé",
+  "Sarah",
+  "Laura",
+  "Manon",
+  "Julie",
+  "Clara",
+  "Léa",
+  "Alice"
+];
+
+const noms = [
+  "Martin",
+  "Bernard",
+  "Dubois",
+  "Thomas",
+  "Robert",
+  "Richard",
+  "Petit",
+  "Durand",
+  "Leroy",
+  "Moreau",
+  "Simon",
+  "Laurent",
+  "Lefebvre",
+  "Michel",
+  "Garcia",
+  "David",
+  "Bertrand",
+  "Roux",
+  "Vincent",
+  "Fournier"
+];
+
+
+/* =========================
+   OUTILS
+========================= */
+
+function randomItem(array) {
+
+  return array[
+    Math.floor(Math.random() * array.length)
+  ];
+
+}
+
+
+function randomNumber(min, max) {
+
+  return Math.random() * (max - min) + min;
+
+}
+
+
+function randomInt(min, max) {
+
+  return Math.floor(
+    Math.random() * (max - min + 1)
+  ) + min;
+
+}
+
+
+/* =========================
+   CHAUFFEUR
+========================= */
+
+function saveDriver() {
+
+  const data = {
+
+    nom:
+      document.getElementById("chauffeurNom").value.trim(),
+
+    entreprise:
+      document.getElementById("entreprise").value.trim(),
+
+    telephone:
+      document.getElementById("chauffeurTelephone").value.trim(),
+
+    adresse:
+      document.getElementById("chauffeurAdresse").value.trim(),
+
+    siret:
+      document.getElementById("siret").value.trim(),
+
+    immatriculation:
+      document.getElementById("immatriculation").value.trim()
+
+  };
+
+
+  localStorage.setItem(
+    "chauffeur",
+    JSON.stringify(data)
+  );
+
+
+  showStatus(
+    "✅ Informations chauffeur enregistrées.",
+    "success-status"
+  );
+
+}
+
+
+function loadDriver() {
+
+  const saved =
+    localStorage.getItem("chauffeur");
+
+
+  if (!saved) {
+    return;
+  }
+
+
+  try {
+
+    const data =
+      JSON.parse(saved);
+
+
+    document.getElementById(
+      "chauffeurNom"
+    ).value = data.nom || "";
+
+
+    document.getElementById(
+      "entreprise"
+    ).value = data.entreprise || "";
+
+
+    document.getElementById(
+      "chauffeurTelephone"
+    ).value = data.telephone || "";
+
+
+    document.getElementById(
+      "chauffeurAdresse"
+    ).value = data.adresse || "";
+
+
+    document.getElementById(
+      "siret"
+    ).value = data.siret || "";
+
+
+    document.getElementById(
+      "immatriculation"
+    ).value = data.immatriculation || "";
+
+  } catch (error) {
+
+    console.error(
+      "Erreur lecture chauffeur :",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+function showStatus(
+  message,
+  type = ""
+) {
+
+  const status =
+    document.getElementById("status");
+
+
+  status.textContent = message;
+
+  status.className =
+    "status " + type;
+
+
+  clearTimeout(
+    window.statusTimeout
+  );
+
+
+  window.statusTimeout =
+    setTimeout(() => {
+
+      status.classList.add("hidden");
+
+    }, 5000);
+
+}
+
+
+/* =========================
+   GEOLOCALISATION
+========================= */
+
+function getLocation() {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      if (!navigator.geolocation) {
+
+        reject(
+          new Error(
+            "La géolocalisation n'est pas disponible."
+          )
+        );
+
+        return;
+      }
+
+
+      navigator.geolocation.getCurrentPosition(
+
+        position => {
+
+          resolve({
+
+            lat:
+              position.coords.latitude,
+
+            lon:
+              position.coords.longitude
+
+          });
+
+        },
+
+        error => {
+
+          reject(error);
+
+        },
+
+        {
+
+          enableHighAccuracy: true,
+
+          timeout: 15000,
+
+          maximumAge: 60000
+
+        }
+
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   POINT GPS ALÉATOIRE
+========================= */
+
+function randomPoint(
+  lat,
+  lon,
+  distanceKm
+) {
+
+  const angle =
+    Math.random() * Math.PI * 2;
+
+
+  const earthRadius = 6371;
+
+
+  const distanceRad =
+    distanceKm / earthRadius;
+
+
+  const latRad =
+    lat * Math.PI / 180;
+
+
+  const lonRad =
+    lon * Math.PI / 180;
+
+
+  const newLat =
+    Math.asin(
+
+      Math.sin(latRad) *
+      Math.cos(distanceRad)
+
+      +
+
+      Math.cos(latRad) *
+      Math.sin(distanceRad) *
+      Math.cos(angle)
+
+    );
+
+
+  const newLon =
+
+    lonRad
+
+    +
+
+    Math.atan2(
+
+      Math.sin(angle) *
+      Math.sin(distanceRad) *
+      Math.cos(latRad),
+
+      Math.cos(distanceRad)
+
+      -
+
+      Math.sin(latRad) *
+      Math.sin(newLat)
+
+    );
+
+
+  return {
+
+    lat:
+      newLat * 180 / Math.PI,
+
+    lon:
+      newLon * 180 / Math.PI
+
+  };
+
+}
+
+
+/* =========================
+   REVERSE GEOCODING
+========================= */
+
+async function reverseGeocode(point) {
+
+  const url =
+
+    "https://nominatim.openstreetmap.org/reverse" +
+
+    "?format=jsonv2" +
+
+    "&lat=" +
+    encodeURIComponent(point.lat) +
+
+    "&lon=" +
+    encodeURIComponent(point.lon) +
+
+    "&zoom=18" +
+
+    "&addressdetails=1";
+
+
+  const response =
+    await fetch(
+
+      url,
+
+      {
+
+        headers: {
+
+          "Accept":
+            "application/json"
+
+        }
+
+      }
+
+    );
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      "Impossible de récupérer l'adresse."
+    );
+
+  }
+
+
+  const data =
+    await response.json();
+
+
+  return (
+
+    data.display_name ||
+
+    `${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}`
+
+  );
+
+}
+
+
+/* =========================
+   TELEPHONE FICTIF
+========================= */
+
+function generatePhone() {
+
+  return (
+
+    "06 " +
+
+    randomInt(10, 99) +
+
+    " " +
+
+    randomInt(10, 99) +
+
+    " " +
+
+    randomInt(10, 99) +
+
+    " " +
+
+    randomInt(10, 99)
+
+  );
+
+}
+
+
+/* =========================
+   DATE
+========================= */
+
+function formatDate(date) {
+
+  return (
+
+    date.toLocaleDateString(
+      "fr-FR"
+    )
+
+    +
+
+    " à "
+
+    +
+
+    date.toLocaleTimeString(
+      "fr-FR",
+      {
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    )
+
+  );
+
+}
+
+
+/* =========================
+   NUMÉRO DU BON
+========================= */
+
+function generateNumber() {
+
+  return (
+
+    "VTC-" +
+
+    new Date().getFullYear() +
+
+    "-" +
+
+    randomInt(
+      100000,
+      999999
+    )
+
+  );
+
+}
+
+
+/* =========================
+   GÉNÉRATION COURSE
+========================= */
+
+async function generateCourse() {
+
+  const buttons =
+    document.querySelectorAll(
+      ".primary"
+    );
+
+
+  buttons.forEach(
+    button => {
+      button.disabled = true;
+    }
+  );
+
+
+  showStatus(
+    "📍 Récupération de votre position..."
+  );
+
+
+  try {
+
+    const position =
+      await getLocation();
+
+
+    showStatus(
+      "🎲 Génération de la course..."
+    );
+
+
+    /*
+      Départ entre 2 et 7 km.
+      Arrivée entre 20 et 40 km.
+    */
+
+    const distanceDepart =
+      randomNumber(2, 7);
+
+
+    const distanceArrivee =
+      randomNumber(20, 40);
+
+
+    const departPoint =
+      randomPoint(
+
+        position.lat,
+
+        position.lon,
+
+        distanceDepart
+
+      );
+
+
+    const arriveePoint =
+      randomPoint(
+
+        position.lat,
+
+        position.lon,
+
+        distanceArrivee
+
+      );
+
+
+    showStatus(
+      "🗺️ Recherche des adresses..."
+    );
+
+
+    const [
+      depart,
+      arrivee
+    ] = await Promise.all([
+
+      reverseGeocode(
+        departPoint
+      ),
+
+      reverseGeocode(
+        arriveePoint
+      )
+
+    ]);
+
+
+    /* CLIENT FICTIF */
+
+    const client =
+
+      randomItem(prenoms)
+
+      +
+
+      " "
+
+      +
+
+      randomItem(noms);
+
+
+    /* DATE FUTURE */
+
+    const date =
+      new Date();
+
+
+    date.setMinutes(
+
+      date.getMinutes()
+
+      +
+
+      randomInt(
+        15,
+        180
+      )
+
+    );
+
+
+    /* DURÉE */
+
+    const duree =
+
+      Math.round(
+        distanceArrivee
+        / 0.75
+        * 60
+      );
+
+
+    /* PRIX */
+
+    const prix =
+
+      Math.round(
+
+        (
+
+          distanceArrivee *
+          2.2
+
+          +
+
+          8
+
+        ) * 100
+
+      ) / 100;
+
+
+    /* CHAUFFEUR */
+
+    const chauffeur =
+
+      JSON.parse(
+
+        localStorage.getItem(
+          "chauffeur"
+        ) || "{}"
+
+      );
+
+
+    /* REMPLISSAGE */
+
+    document.getElementById(
+      "bonNumero"
+    ).textContent =
+
+      "N° " +
+      generateNumber();
+
+
+    document.getElementById(
+      "bonDate"
+    ).textContent =
+
+      formatDate(
+        new Date()
+      );
+
+
+    document.getElementById(
+      "bChauffeur"
+    ).textContent =
+
+      chauffeur.nom || "Non renseigné";
+
+
+    document.getElementById(
+      "bEntreprise"
+    ).textContent =
+
+      chauffeur.entreprise ||
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bTelephone"
+    ).textContent =
+
+      chauffeur.telephone ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bAdresse"
+    ).textContent =
+
+      chauffeur.adresse ||
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bSiret"
+    ).textContent =
+
+      chauffeur.siret ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bImmat"
+    ).textContent =
+
+      chauffeur.immatriculation ||
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bClient"
+    ).textContent =
+
+      client;
+
+
+    document.getElementById(
+      "bClientTel"
+    ).textContent =
+
+      generatePhone();
+
+
+    document.getElementById(
+      "bDepart"
+    ).textContent =
+
+      depart;
+
+
+    document.getElementById(
+      "bArrivee"
+    ).textContent =
+
+      arrivee;
+
+
+    document.getElementById(
+      "bCourseDate"
+    ).textContent =
+
+      formatDate(
+        date
+      );
+
+
+    document.getElementById(
+      "bDistance"
+    ).textContent =
+
+      distanceArrivee.toFixed(1)
+      + " km";
+
+
+    document.getElementById(
+      "bDuree"
+    ).textContent =
+
+      duree +
+      " minutes";
+
+
+    document.getElementById(
+      "bPrix"
+    ).textContent =
+
+      prix.toFixed(2);
+
+
+    /* AFFICHAGE */
+
+    document.getElementById(
+      "resultCard"
+    ).classList.remove(
+      "hidden"
+    );
+
+
+    showStatus(
+      "✅ Course générée avec succès.",
+      "success-status"
+    );
+
+
+    document.getElementById(
+      "resultCard"
+    ).scrollIntoView({
+
+      behavior: "smooth",
+
+      block: "start"
+
+    });
+
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    let message =
+
+      "❌ Impossible de générer la course.";
+
+
+    if (
+      error.code === 1
+    ) {
+
+      message =
+        "❌ Localisation refusée. Autorisez la géolocalisation dans votre navigateur.";
+
+    }
+
+
+    if (
+      error.code === 2
+    ) {
+
+      message =
+        "❌ Position impossible à déterminer.";
+
+    }
+
+
+    if (
+      error.code === 3
+    ) {
+
+      message =
+        "❌ La récupération de votre position a expiré.";
+
+    }
+
+
+    showStatus(
+      message,
+      "error"
+    );
+
+
+  } finally {
+
+    buttons.forEach(
+      button => {
+        button.disabled = false;
+      }
+    );
+
+  }
+
+}
+
+
+/* =========================
+   INITIALISATION
+========================= */
+
+loadDriver();
+
+</script></body>
+</html>
