@@ -1284,10 +1284,7 @@ button:disabled {
     </div>
 
 
-    <!-- =================================================
-         TARIFICATION
-         Distance et tarif/km masqués
-    ================================================== -->
+    <!-- TARIFICATION -->
 
     <div class="pricing">
 
@@ -1883,6 +1880,8 @@ function calculateDistanceKm(
 
 /* =====================================================
    REVERSE GEOCODING
+   FORMAT :
+   NUMERO + RUE, CODE POSTAL + VILLE
 ===================================================== */
 
 async function reverseGeocode(point) {
@@ -1929,15 +1928,120 @@ async function reverseGeocode(point) {
     await response.json();
 
 
-  return (
+  const address =
+    data.address || {};
 
-    data.display_name
 
-    ||
+  /*
+    NUMERO DE RUE
+  */
 
-    `${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}`
+  const numero =
+    address.house_number || "";
 
-  );
+
+  /*
+    NOM DE LA RUE
+  */
+
+  const rue =
+    address.road ||
+    address.pedestrian ||
+    address.residential ||
+    address.street ||
+    "";
+
+
+  /*
+    CODE POSTAL
+  */
+
+  const codePostal =
+    address.postcode || "";
+
+
+  /*
+    VILLE
+
+    On ne récupère volontairement
+    PAS le département, la région
+    ou le pays.
+  */
+
+  const ville =
+    address.city ||
+    address.town ||
+    address.municipality ||
+    address.village ||
+    address.hamlet ||
+    "";
+
+
+  /*
+    CONSTRUCTION DE L'ADRESSE
+
+    Exemple :
+    25 Rue Victor Hugo, 69002 Lyon
+  */
+
+  let adresse = "";
+
+
+  if (numero && rue) {
+
+    adresse =
+      numero +
+      " " +
+      rue;
+
+  } else if (rue) {
+
+    adresse =
+      rue;
+
+  } else if (numero) {
+
+    adresse =
+      numero;
+
+  }
+
+
+  /*
+    CODE POSTAL + VILLE
+  */
+
+  const villeComplete =
+
+    [codePostal, ville]
+      .filter(Boolean)
+      .join(" ");
+
+
+  if (villeComplete) {
+
+    adresse +=
+
+      adresse
+        ? ", " + villeComplete
+        : villeComplete;
+
+  }
+
+
+  /*
+    SI AUCUNE ADRESSE N'EST TROUVEE
+  */
+
+  if (!adresse) {
+
+    adresse =
+      `${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}`;
+
+  }
+
+
+  return adresse;
 
 }
 
@@ -2132,6 +2236,13 @@ async function generateCourse() {
     );
 
 
+    /*
+      Les adresses retournées sont
+      maintenant uniquement :
+
+      Numéro + rue, code postal + ville
+    */
+
     const [
       depart,
       arrivee
@@ -2200,8 +2311,7 @@ async function generateCourse() {
 
     /*
       PRISE EN CHARGE
-      Entre +20 et +45 minutes
-      après la génération.
+      Entre +20 et +45 minutes.
     */
 
     const minutesAvantPriseEnCharge =
@@ -2223,9 +2333,6 @@ async function generateCourse() {
 
     /*
       TARIF INTERNE
-      Entre 2,00 et 2,50 €/km.
-      
-      Il n'est PAS affiché dans le PDF.
     */
 
     const tarifKm =
@@ -2440,8 +2547,7 @@ async function generateCourse() {
 
 
     /*
-      HEURE DE COMMANDE CLIENT
-      5 à 25 minutes avant génération.
+      HEURE DE COMMANDE
     */
 
     document.getElementById(
@@ -2467,8 +2573,7 @@ async function generateCourse() {
 
 
     /*
-      PRISE EN CHARGE :
-      +20 à +45 min.
+      PRISE EN CHARGE
     */
 
     document.getElementById(
@@ -2480,8 +2585,7 @@ async function generateCourse() {
 
 
     /*
-      DISTANCE :
-      affichée uniquement dans la zone DESTINATION.
+      DISTANCE
     */
 
     document.getElementById(
@@ -2496,9 +2600,7 @@ async function generateCourse() {
 
 
     /*
-      TARIFICATION :
-      aucun prix/km et aucune distance affichés.
-      Seul le montant total est visible.
+      PRIX
     */
 
     document.getElementById(
