@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Générateur de bons VTC</title>
 
 <style>
@@ -31,10 +32,6 @@ body {
   color: var(--text);
 }
 
-/* =========================
-   HEADER
-========================= */
-
 .app-header {
   background: linear-gradient(135deg, #163b59, #24527a);
   color: white;
@@ -58,19 +55,11 @@ body {
   font-size: 14px;
 }
 
-/* =========================
-   CONTENEUR
-========================= */
-
 .container {
   max-width: 820px;
   margin: auto;
   padding: 20px 15px 40px;
 }
-
-/* =========================
-   CARTES
-========================= */
 
 .card {
   background: var(--white);
@@ -109,10 +98,6 @@ body {
   margin-top: 3px;
 }
 
-/* =========================
-   FORMULAIRE
-========================= */
-
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -145,10 +130,6 @@ input:focus {
   border-color: #2563eb;
   box-shadow: 0 0 0 3px rgba(37,99,235,.10);
 }
-
-/* =========================
-   BOUTONS
-========================= */
 
 button {
   width: 100%;
@@ -189,10 +170,6 @@ button:disabled {
   background: var(--green);
   color: white;
 }
-
-/* =========================
-   STATUS
-========================= */
 
 .status {
   margin-top: 14px;
@@ -247,10 +224,6 @@ button:disabled {
   position: relative;
   z-index: 1;
 }
-
-/* =========================
-   EN-TETE DU BON
-========================= */
 
 .bon-top {
   display: flex;
@@ -414,7 +387,7 @@ button:disabled {
 }
 
 /* =========================
-   CHAUFFEUR VEHICULE
+   CHAUFFEUR
 ========================= */
 
 .section-block {
@@ -461,30 +434,11 @@ button:disabled {
   color: #24527a;
   font-size: 14px;
   font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.pricing-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  padding: 7px 0;
-}
-
-.pricing-label {
-  color: #6b7280;
-  font-size: 14px;
-}
-
-.pricing-value {
-  color: #374151;
-  font-size: 14px;
-  font-weight: 700;
+  margin-bottom: 15px;
 }
 
 .pricing-total {
-  margin-top: 15px;
+  margin-top: 5px;
   padding-top: 16px;
   border-top: 1px solid var(--border);
   display: flex;
@@ -575,28 +529,19 @@ button:disabled {
   }
 }
 
-/* =====================================================
-   IMPRESSION / PDF - UNE SEULE PAGE A4
-===================================================== */
+/* =========================
+   IMPRESSION A4
+========================= */
 
 @media print {
 
   @page {
-    size: A4 portrait;
-    margin: 7mm;
-  }
-
-  html,
-  body {
-    width: 210mm;
-    height: 297mm;
-    margin: 0;
-    padding: 0;
-    background: white !important;
+    size: A4;
+    margin: 10mm;
   }
 
   body {
-    font-size: 10px;
+    background: white;
   }
 
   .app-header,
@@ -605,195 +550,22 @@ button:disabled {
   }
 
   .container {
-    width: 100%;
     max-width: none;
-    margin: 0;
     padding: 0;
   }
 
   .card {
-    width: 100%;
-    margin: 0;
-    padding: 0;
     box-shadow: none;
-    border: none;
-    border-radius: 0;
-  }
-
-  #resultCard {
-    display: block !important;
+    padding: 0;
+    margin: 0;
   }
 
   .bon {
-    width: 100%;
-    min-height: 0;
-    border: 1px solid #dfe5ea;
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .bon-content,
-  .bon,
-  .route-box,
-  .info-grid,
-  .section-block,
-  .pricing {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-
-  .bon-top {
-    padding: 12px 15px;
-    gap: 15px;
-  }
-
-  .company-block h2 {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-
-  .company-details {
-    font-size: 9px;
-    line-height: 1.35;
-  }
-
-  .order-block h1 {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-
-  .order-number {
-    font-size: 10px;
-    margin-bottom: 4px;
-  }
-
-  .reservation-label {
-    font-size: 9px;
-  }
-
-  .justification {
-    margin: 10px 15px 0;
-    padding: 8px 10px;
-  }
-
-  .justification-title {
-    font-size: 10px;
-    margin-bottom: 3px;
-  }
-
-  .justification-text {
-    font-size: 8px;
-    line-height: 1.3;
-  }
-
-  .route-box {
-    margin: 10px 15px;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .route-column {
-    padding: 10px 12px;
-  }
-
-  .route-title {
-    font-size: 9px;
-    margin-bottom: 7px;
-  }
-
-  .route-address {
-    font-size: 10px;
-    line-height: 1.3;
-  }
-
-  .route-date,
-  .route-distance {
-    font-size: 9px;
-    margin-top: 5px;
-  }
-
-  .info-grid {
-    margin: 0 15px 10px;
-    gap: 10px;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .info-title {
-    padding: 8px 10px;
-    font-size: 9px;
-  }
-
-  .info-body {
-    padding: 3px 10px 6px;
-  }
-
-  .info-row {
-    grid-template-columns: 90px 1fr;
-    padding: 4px 0;
-    gap: 5px;
-    font-size: 8px;
-  }
-
-  .section-block {
-    margin: 0 15px 10px;
-  }
-
-  .section-title {
-    font-size: 9px;
-    padding-bottom: 5px;
-    margin-bottom: 3px;
-  }
-
-  .driver-row {
-    grid-template-columns: 130px 1fr;
-    padding: 4px 2px;
-    font-size: 8px;
-  }
-
-  .pricing {
-    margin: 0 15px 12px;
-    padding: 10px 13px;
-  }
-
-  .pricing-title {
-    font-size: 9px;
-    margin-bottom: 8px;
-  }
-
-  .pricing-row {
-    padding: 3px 0;
-  }
-
-  .pricing-label,
-  .pricing-value {
-    font-size: 9px;
-  }
-
-  .pricing-total {
-    margin-top: 6px;
-    padding-top: 8px;
-  }
-
-  .total-label {
-    font-size: 10px;
-  }
-
-  .total-price {
-    font-size: 18px;
-  }
-
-  .total-price small {
-    font-size: 9px;
-  }
-
-  .watermark {
-    font-size: 40px;
-  }
-
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+    border: none;
+    border-radius: 0;
   }
 }
+
 </style>
 </head>
 
@@ -803,7 +575,9 @@ button:disabled {
 
   <div class="logo">🚗</div>
 
-  <h1>Générateur de bons VTC</h1>
+  <h1>
+    Générateur de bons VTC
+  </h1>
 
   <p>
     Création de bons de commande — mode démonstration
@@ -816,7 +590,7 @@ button:disabled {
 
 
 <!-- =====================================================
-     EXPLOITANT VTC
+     EXPLOITANT
 ===================================================== -->
 
 <div class="card no-print">
@@ -826,18 +600,23 @@ button:disabled {
     <div class="icon">🏢</div>
 
     <div>
-      <h2>Informations exploitant VTC</h2>
+
+      <h2>
+        Informations exploitant VTC
+      </h2>
 
       <div class="card-subtitle">
         Ces informations seront reprises automatiquement
         sur le bon.
       </div>
+
     </div>
 
   </div>
 
 
   <div class="form-grid">
+
 
     <div class="form-full">
 
@@ -928,13 +707,14 @@ button:disabled {
 
     </div>
 
+
   </div>
 
 </div>
 
 
 <!-- =====================================================
-     CHAUFFEUR ET VEHICULE
+     CHAUFFEUR / VEHICULE
 ===================================================== -->
 
 <div class="card no-print">
@@ -945,7 +725,9 @@ button:disabled {
 
     <div>
 
-      <h2>Chauffeur et véhicule</h2>
+      <h2>
+        Chauffeur et véhicule
+      </h2>
 
       <div class="card-subtitle">
         Ces informations seront reprises sur le bon.
@@ -1074,7 +856,9 @@ button:disabled {
 
     <div>
 
-      <h2>Nouvelle course</h2>
+      <h2>
+        Nouvelle course
+      </h2>
 
       <div class="card-subtitle">
         La prise en charge sera automatiquement
@@ -1169,7 +953,8 @@ button:disabled {
         <div
           id="bonNumero"
           class="order-number"
-        ></div>
+        >
+        </div>
 
         <div class="reservation-label">
           Réservation préalable VTC
@@ -1499,45 +1284,15 @@ button:disabled {
     </div>
 
 
-    <!-- TARIFICATION -->
+    <!-- =================================================
+         TARIFICATION
+         Distance et tarif/km masqués
+    ================================================== -->
 
     <div class="pricing">
 
-
       <div class="pricing-title">
         TARIFICATION
-      </div>
-
-
-      <div class="pricing-row">
-
-        <div class="pricing-label">
-          Distance
-        </div>
-
-        <div
-          id="prixDistance"
-          class="pricing-value"
-        >
-          -
-        </div>
-
-      </div>
-
-
-      <div class="pricing-row">
-
-        <div class="pricing-label">
-          Tarif kilométrique
-        </div>
-
-        <div
-          id="prixKm"
-          class="pricing-value"
-        >
-          -
-        </div>
-
       </div>
 
 
@@ -1560,7 +1315,6 @@ button:disabled {
         </div>
 
       </div>
-
 
     </div>
 
@@ -1687,7 +1441,7 @@ function randomInt(min, max) {
 
 
 /* =====================================================
-   SAUVEGARDE DES INFORMATIONS
+   SAUVEGARDE
 ===================================================== */
 
 function saveDriver() {
@@ -2249,7 +2003,7 @@ function formatDate(date) {
 
 
 /* =====================================================
-   NUMERO ALEATOIRE DU BON
+   NUMERO BON DE COMMANDE
 ===================================================== */
 
 function generateNumber() {
@@ -2273,7 +2027,7 @@ function generateNumber() {
 
 
 /* =====================================================
-   GENERATION DE COURSE
+   GENERATION
 ===================================================== */
 
 async function generateCourse() {
@@ -2302,7 +2056,7 @@ async function generateCourse() {
   try {
 
 
-    /* POSITION ACTUELLE */
+    /* POSITION */
 
     const position =
       await getLocation();
@@ -2326,7 +2080,7 @@ async function generateCourse() {
 
 
     /*
-      Destination entre 20 et 40 km
+      Arrivée entre 20 et 40 km
       de la position actuelle.
     */
 
@@ -2363,7 +2117,7 @@ async function generateCourse() {
 
     /*
       Distance réelle entre
-      le départ et la destination.
+      départ et arrivée.
     */
 
     const distanceReelle =
@@ -2394,9 +2148,7 @@ async function generateCourse() {
     ]);
 
 
-    /* =================================================
-       CLIENT FICTIF
-    ================================================= */
+    /* CLIENT */
 
     const client =
 
@@ -2415,18 +2167,19 @@ async function generateCourse() {
       generatePhone();
 
 
-    /* =================================================
-       HEURE DE GENERATION
-    ================================================= */
+    /*
+      HEURE DE GENERATION
+    */
 
     const generationDate =
       new Date();
 
 
-    /* =================================================
-       COMMANDE CLIENT
-       ENTRE 5 ET 25 MIN AVANT
-    ================================================= */
+    /*
+      HEURE DE COMMANDE CLIENT
+      Entre 5 et 25 minutes
+      avant la génération.
+    */
 
     const minutesAvantCommande =
       randomInt(
@@ -2437,22 +2190,19 @@ async function generateCourse() {
 
     const commandeDate =
       new Date(
-
         generationDate.getTime()
-
         -
-
         minutesAvantCommande *
         60 *
         1000
-
       );
 
 
-    /* =================================================
-       PRISE EN CHARGE
-       ENTRE +20 ET +45 MIN
-    ================================================= */
+    /*
+      PRISE EN CHARGE
+      Entre +20 et +45 minutes
+      après la génération.
+    */
 
     const minutesAvantPriseEnCharge =
       randomInt(
@@ -2463,22 +2213,20 @@ async function generateCourse() {
 
     const courseDate =
       new Date(
-
         generationDate.getTime()
-
         +
-
         minutesAvantPriseEnCharge *
         60 *
         1000
-
       );
 
 
-    /* =================================================
-       TARIF ALEATOIRE
-       ENTRE 2,00 ET 2,50 €/KM
-    ================================================= */
+    /*
+      TARIF INTERNE
+      Entre 2,00 et 2,50 €/km.
+      
+      Il n'est PAS affiché dans le PDF.
+    */
 
     const tarifKm =
       randomNumber(
@@ -2487,9 +2235,9 @@ async function generateCourse() {
       );
 
 
-    /* =================================================
-       PRIX TOTAL
-    ================================================= */
+    /*
+      PRIX FINAL
+    */
 
     const prix =
       Math.round(
@@ -2501,9 +2249,9 @@ async function generateCourse() {
       ) / 100;
 
 
-    /* =================================================
-       INFORMATIONS CHAUFFEUR
-    ================================================= */
+    /*
+      INFORMATIONS SAUVEGARDEES
+    */
 
     const chauffeur =
       JSON.parse(
@@ -2519,9 +2267,7 @@ async function generateCourse() {
       );
 
 
-    /* =================================================
-       NUMERO DU BON
-    ================================================= */
+    /* NUMERO */
 
     document.getElementById(
       "bonNumero"
@@ -2529,9 +2275,7 @@ async function generateCourse() {
       generateNumber();
 
 
-    /* =================================================
-       ENTREPRISE EN-TETE
-    ================================================= */
+    /* ENTREPRISE HEADER */
 
     document.getElementById(
       "bonEntrepriseHeader"
@@ -2569,9 +2313,7 @@ async function generateCourse() {
       "Non renseigné";
 
 
-    /* =================================================
-       EXPLOITANT
-    ================================================= */
+    /* EXPLOITANT */
 
     document.getElementById(
       "bEntreprise"
@@ -2627,9 +2369,7 @@ async function generateCourse() {
       "Non renseigné";
 
 
-    /* =================================================
-       CHAUFFEUR
-    ================================================= */
+    /* CHAUFFEUR */
 
     document.getElementById(
       "bChauffeur"
@@ -2685,9 +2425,7 @@ async function generateCourse() {
       "Non renseignée";
 
 
-    /* =================================================
-       CLIENT
-    ================================================= */
+    /* CLIENT */
 
     document.getElementById(
       "bClient"
@@ -2701,6 +2439,11 @@ async function generateCourse() {
       clientTelephone;
 
 
+    /*
+      HEURE DE COMMANDE CLIENT
+      5 à 25 minutes avant génération.
+    */
+
     document.getElementById(
       "bCommande"
     ).textContent =
@@ -2709,9 +2452,7 @@ async function generateCourse() {
       );
 
 
-    /* =================================================
-       TRAJET
-    ================================================= */
+    /* TRAJET */
 
     document.getElementById(
       "bDepart"
@@ -2726,8 +2467,8 @@ async function generateCourse() {
 
 
     /*
-      Heure de prise en charge
-      entre +20 et +45 minutes.
+      PRISE EN CHARGE :
+      +20 à +45 min.
     */
 
     document.getElementById(
@@ -2738,9 +2479,10 @@ async function generateCourse() {
       );
 
 
-    /* =================================================
-       DISTANCE
-    ================================================= */
+    /*
+      DISTANCE :
+      affichée uniquement dans la zone DESTINATION.
+    */
 
     document.getElementById(
       "bDistance"
@@ -2753,35 +2495,11 @@ async function generateCourse() {
       " km";
 
 
-    document.getElementById(
-      "prixDistance"
-    ).textContent =
-
-      distanceReelle.toFixed(2)
-
-      +
-
-      " km";
-
-
-    /* =================================================
-       TARIF
-    ================================================= */
-
-    document.getElementById(
-      "prixKm"
-    ).textContent =
-
-      tarifKm.toFixed(2)
-
-      +
-
-      " € / km";
-
-
-    /* =================================================
-       PRIX
-    ================================================= */
+    /*
+      TARIFICATION :
+      aucun prix/km et aucune distance affichés.
+      Seul le montant total est visible.
+    */
 
     document.getElementById(
       "bPrix"
@@ -2795,9 +2513,7 @@ async function generateCourse() {
         );
 
 
-    /* =================================================
-       AFFICHAGE
-    ================================================= */
+    /* AFFICHAGE */
 
     document.getElementById(
       "resultCard"
