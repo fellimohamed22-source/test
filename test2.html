@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Générateur de bons VTC</title>
 
 <style>
+
 :root {
   --primary: #24527a;
+  --primary-dark: #173d5b;
   --green: #25866d;
   --dark: #1f2937;
   --text: #374151;
@@ -16,7 +19,7 @@
   --light-blue: #eaf3fd;
   --light-green: #e9f7f2;
   --background: #f4f8fb;
-  --white: #fff;
+  --white: #ffffff;
 }
 
 * {
@@ -30,12 +33,18 @@ body {
   color: var(--text);
 }
 
-/* =========================
-   HEADER APPLICATION
-========================= */
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .app-header {
-  background: linear-gradient(135deg, #163b59, #24527a);
+  background: linear-gradient(
+    135deg,
+    #163b59,
+    #24527a
+  );
+
   color: white;
   padding: 25px 15px;
   text-align: center;
@@ -43,22 +52,24 @@ body {
 
 .app-header .logo {
   font-size: 38px;
+  margin-bottom: 5px;
 }
 
 .app-header h1 {
-  margin: 5px 0;
+  margin: 0;
   font-size: 24px;
 }
 
 .app-header p {
-  margin: 5px 0 0;
-  font-size: 14px;
+  margin: 7px 0 0;
   opacity: .8;
+  font-size: 14px;
 }
 
-/* =========================
+
+/* =====================================================
    CONTENEUR
-========================= */
+===================================================== */
 
 .container {
   max-width: 820px;
@@ -66,13 +77,14 @@ body {
   padding: 20px 15px 40px;
 }
 
-/* =========================
-   CARTES FORMULAIRE
-========================= */
+
+/* =====================================================
+   CARTES
+===================================================== */
 
 .card {
   background: var(--white);
-  border-radius: 14px;
+  border-radius: 15px;
   padding: 22px;
   margin-bottom: 18px;
   box-shadow: 0 5px 18px rgba(0,0,0,.06);
@@ -88,11 +100,15 @@ body {
 .card-title .icon {
   width: 40px;
   height: 40px;
+
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
   border-radius: 10px;
+
   background: #eff6ff;
+
   font-size: 20px;
 }
 
@@ -102,45 +118,95 @@ body {
 }
 
 .card-subtitle {
-  margin-top: 3px;
   color: var(--muted);
   font-size: 13px;
+  margin-top: 3px;
+}
+
+
+/* =====================================================
+   FORMULAIRE
+===================================================== */
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+.form-full {
+  grid-column: 1 / -1;
 }
 
 label {
   display: block;
+
   margin: 13px 0 6px;
+
   font-size: 14px;
-  font-weight: bold;
+
+  font-weight: 700;
 }
 
-input {
+input,
+select {
   width: 100%;
-  padding: 12px 13px;
+
+  padding: 13px 14px;
+
   border: 1px solid #d1d5db;
+
   border-radius: 9px;
+
   font-size: 15px;
+
   outline: none;
+
+  background: white;
+
+  transition: .2s;
 }
 
-input:focus {
+input:focus,
+select:focus {
   border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(37,99,235,.1);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(37,99,235,.10);
 }
 
-/* =========================
+
+/* =====================================================
    BOUTONS
-========================= */
+===================================================== */
 
 button {
   width: 100%;
+
+  padding: 14px;
+
   border: 0;
-  border-radius: 9px;
-  padding: 13px;
-  margin-top: 12px;
+
+  border-radius: 10px;
+
   font-size: 15px;
-  font-weight: bold;
+
+  font-weight: 700;
+
   cursor: pointer;
+
+  margin-top: 12px;
+
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
 }
 
 button:disabled {
@@ -153,28 +219,39 @@ button:disabled {
   color: white;
 }
 
+.primary:hover {
+  background: #1d4ed8;
+}
+
 .secondary {
   background: #eef1f4;
   color: #1f2937;
 }
 
 .success {
-  background: #15966f;
+  background: var(--green);
   color: white;
 }
 
-/* =========================
+
+/* =====================================================
    STATUS
-========================= */
+===================================================== */
 
 .status {
-  margin-top: 13px;
-  padding: 12px 14px;
-  border-radius: 8px;
+  margin-top: 14px;
+
+  padding: 13px 15px;
+
+  border-radius: 9px;
+
   background: #eff6ff;
+
   color: #1d4ed8;
+
   font-size: 14px;
-  font-weight: bold;
+
+  font-weight: 600;
 }
 
 .status.error {
@@ -187,65 +264,90 @@ button:disabled {
   color: #15803d;
 }
 
+
+/* =====================================================
+   MASQUAGE
+===================================================== */
+
 .hidden {
   display: none !important;
 }
 
+
 /* =====================================================
-   BON DE COMMANDE
+   BON
 ===================================================== */
 
 .bon {
   position: relative;
+
   background: white;
-  border: 1px solid #e1e7eb;
-  border-radius: 11px;
+
+  border: 1px solid #dfe5ea;
+
+  border-radius: 10px;
+
   overflow: hidden;
 }
 
-/* Filigrane */
-
 .watermark {
   position: absolute;
-  top: 43%;
+
+  top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(-31deg);
-  color: rgba(220, 38, 38, .10);
-  font-size: 65px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-30deg);
+
+  font-size: 60px;
+
   font-weight: 900;
+
+  color: rgba(220,38,38,.10);
+
   white-space: nowrap;
+
   pointer-events: none;
+
   z-index: 0;
 }
-
-/* Contenu */
 
 .bon-content {
   position: relative;
   z-index: 1;
 }
 
-/* =========================
+
+/* =====================================================
    EN-TÊTE DU BON
-========================= */
+===================================================== */
 
 .bon-top {
   display: flex;
+
   justify-content: space-between;
+
   gap: 30px;
-  padding: 28px 28px 25px;
+
+  padding: 28px;
+
   border-bottom: 1px solid var(--border);
 }
 
 .company-block h2 {
   margin: 0 0 10px;
+
   color: #16456c;
+
   font-size: 21px;
 }
 
 .company-details {
   color: #6b7280;
+
   font-size: 13px;
+
   line-height: 1.6;
 }
 
@@ -255,57 +357,79 @@ button:disabled {
 
 .order-block h1 {
   margin: 0 0 8px;
+
   color: #111827;
+
   font-size: 22px;
 }
 
 .order-number {
   color: #24527a;
+
   font-size: 14px;
-  font-weight: bold;
+
+  font-weight: 700;
+
   margin-bottom: 8px;
 }
 
 .reservation-label {
   color: #777;
+
   font-size: 13px;
 }
 
-/* =========================
+
+/* =====================================================
    JUSTIFICATION
-========================= */
+===================================================== */
 
 .justification {
   margin: 28px 28px 0;
-  padding: 14px 18px;
+
+  padding: 15px 18px;
+
   border: 1px solid #d9ece6;
+
   border-radius: 10px;
+
   background: var(--light-green);
 }
 
 .justification-title {
   color: #257b68;
-  font-weight: bold;
+
+  font-weight: 700;
+
   font-size: 14px;
+
   margin-bottom: 8px;
 }
 
 .justification-text {
   color: #6b7280;
+
   font-size: 12px;
+
+  line-height: 1.5;
 }
 
-/* =========================
+
+/* =====================================================
    TRAJET
-========================= */
+===================================================== */
 
 .route-box {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
-  gap: 0;
+
   margin: 28px;
+
   border-radius: 10px;
+
   overflow: hidden;
+
   background: var(--light-blue);
 }
 
@@ -314,69 +438,95 @@ button:disabled {
 }
 
 .route-column + .route-column {
-  border-left: 1px solid rgba(120,150,180,.15);
+  border-left: 1px solid rgba(120,150,180,.18);
 }
 
 .route-title {
   color: #25557b;
-  font-weight: bold;
+
+  font-weight: 700;
+
   font-size: 13px;
+
   margin-bottom: 14px;
 }
 
 .route-address {
   color: #1f2937;
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 1.35;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  line-height: 1.45;
 }
 
 .route-date {
-  margin-top: 7px;
+  margin-top: 8px;
+
   color: #6b7280;
+
   font-size: 13px;
 }
 
 .route-distance {
-  margin-top: 17px;
+  margin-top: 12px;
+
   color: #6b7280;
+
   font-size: 13px;
 }
 
-/* =========================
-   INFORMATIONS EXPLOITANT / CLIENT
-========================= */
+
+/* =====================================================
+   EXPLOITANT / CLIENT
+===================================================== */
 
 .info-grid {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
-  gap: 36px;
+
+  gap: 28px;
+
   margin: 0 28px 28px;
 }
 
 .info-card {
   border: 1px solid var(--border);
+
   border-radius: 9px;
+
   overflow: hidden;
+
+  background: white;
 }
 
 .info-title {
-  padding: 15px 18px 10px;
+  padding: 14px 18px;
+
   color: #24527a;
-  font-weight: bold;
+
+  font-weight: 700;
+
   font-size: 14px;
+
   border-bottom: 1px solid var(--border);
 }
 
 .info-body {
-  padding: 8px 18px 14px;
+  padding: 7px 18px 13px;
 }
 
 .info-row {
   display: grid;
+
   grid-template-columns: 125px 1fr;
+
   gap: 8px;
+
   padding: 7px 0;
+
   font-size: 13px;
 }
 
@@ -386,11 +536,14 @@ button:disabled {
 
 .info-row span {
   color: #374151;
+
+  word-break: break-word;
 }
 
-/* =========================
-   CHAUFFEUR ET VEHICULE
-========================= */
+
+/* =====================================================
+   CHAUFFEUR / VEHICULE
+===================================================== */
 
 .section-block {
   margin: 0 28px 28px;
@@ -398,17 +551,25 @@ button:disabled {
 
 .section-title {
   color: #24527a;
-  font-weight: bold;
+
+  font-weight: 700;
+
   font-size: 14px;
+
   padding-bottom: 9px;
+
   border-bottom: 1px solid var(--border);
+
   margin-bottom: 8px;
 }
 
 .driver-row {
   display: grid;
+
   grid-template-columns: 200px 1fr;
+
   padding: 7px 4px;
+
   font-size: 13px;
 }
 
@@ -418,52 +579,174 @@ button:disabled {
 
 .driver-row span {
   color: #374151;
+
+  word-break: break-word;
 }
 
-/* =========================
+
+/* =====================================================
    TARIFICATION
-========================= */
+===================================================== */
 
 .pricing {
   margin: 0 28px 28px;
+
   border: 1px solid var(--border);
+
   border-radius: 10px;
-  padding: 23px 26px;
+
+  padding: 22px 25px;
 }
 
 .pricing-title {
   color: #24527a;
+
   font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 22px;
+
+  font-weight: 700;
+
+  margin-bottom: 20px;
 }
 
-.pricing-line {
+.pricing-row {
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
+
+  align-items: center;
+
   gap: 20px;
+
+  padding: 7px 0;
 }
 
 .pricing-label {
   color: #6b7280;
-  font-size: 15px;
+
+  font-size: 14px;
 }
 
-.pricing-price {
+.pricing-value {
+  color: #374151;
+
+  font-size: 14px;
+
+  font-weight: 700;
+}
+
+.pricing-total {
+  margin-top: 15px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid var(--border);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+}
+
+.total-label {
+  color: #24527a;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+.total-price {
   color: #25866d;
-  font-size: 29px;
+
+  font-size: 28px;
+
   font-weight: 800;
-  white-space: nowrap;
 }
 
-.pricing-price small {
-  font-size: 17px;
+.total-price small {
+  font-size: 16px;
 }
 
-/* =========================
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+  .container {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-full {
+    grid-column: auto;
+  }
+
+  .bon-top {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .order-block {
+    text-align: left;
+  }
+
+  .route-box {
+    grid-template-columns: 1fr;
+    margin: 18px;
+  }
+
+  .route-column + .route-column {
+    border-left: none;
+
+    border-top: 1px solid
+      rgba(120,150,180,.18);
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+
+    margin: 0 18px 22px;
+  }
+
+  .section-block {
+    margin: 0 18px 22px;
+  }
+
+  .pricing {
+    margin: 0 18px 22px;
+
+    padding: 19px;
+  }
+
+  .pricing-total {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 7px;
+  }
+
+  .watermark {
+    font-size: 38px;
+  }
+}
+
+
+/* =====================================================
    IMPRESSION
-========================= */
+===================================================== */
 
 @media print {
 
@@ -476,8 +759,8 @@ button:disabled {
     background: white;
   }
 
-  .no-print,
-  .app-header {
+  .app-header,
+  .no-print {
     display: none !important;
   }
 
@@ -497,184 +780,374 @@ button:disabled {
     border-radius: 0;
   }
 
-  .watermark {
-    color: rgba(220,38,38,.10);
-  }
 }
 
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 650px) {
-
-  .container {
-    padding: 10px;
-  }
-
-  .card {
-    padding: 17px;
-  }
-
-  .bon-top {
-    flex-direction: column;
-    padding: 20px;
-  }
-
-  .order-block {
-    text-align: left;
-  }
-
-  .route-box {
-    grid-template-columns: 1fr;
-    margin: 18px;
-  }
-
-  .route-column + .route-column {
-    border-left: none;
-    border-top: 1px solid rgba(120,150,180,.15);
-  }
-
-  .info-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-    margin: 0 18px 22px;
-  }
-
-  .section-block {
-    margin: 0 18px 22px;
-  }
-
-  .pricing {
-    margin: 0 18px 22px;
-    padding: 19px;
-  }
-
-  .pricing-line {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .pricing-price {
-    font-size: 25px;
-  }
-
-  .justification {
-    margin: 18px 18px 0;
-  }
-
-  .watermark {
-    font-size: 40px;
-  }
-}
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
-     EN-TÊTE APPLICATION
-========================= -->
+
+<!-- =====================================================
+     HEADER APPLICATION
+===================================================== -->
 
 <header class="app-header no-print">
-  <div class="logo">🚗</div>
-  <h1>Générateur de bons VTC</h1>
-  <p>Création de bons de commande — mode démonstration</p>
+
+  <div class="logo">
+    🚗
+  </div>
+
+  <h1>
+    Générateur de bons VTC
+  </h1>
+
+  <p>
+    Création de bons de commande — mode démonstration
+  </p>
+
 </header>
 
 
 <div class="container">
 
-<!-- =========================
-     INFORMATIONS CHAUFFEUR
-========================= -->
+
+<!-- =====================================================
+     FORMULAIRE EXPLOITANT
+===================================================== -->
 
 <div class="card no-print">
 
   <div class="card-title">
-    <div class="icon">👤</div>
+
+    <div class="icon">
+      🏢
+    </div>
 
     <div>
-      <h2>Informations chauffeur</h2>
+
+      <h2>
+        Informations exploitant VTC
+      </h2>
+
       <div class="card-subtitle">
-        Ces informations sont conservées uniquement dans votre navigateur.
+        Ces informations seront automatiquement reprises
+        sur le bon généré.
       </div>
+
     </div>
+
   </div>
 
-  <label for="chauffeurNom">Nom / prénom</label>
-  <input id="chauffeurNom" type="text" placeholder="Jean Dupont">
 
-  <label for="entreprise">Entreprise</label>
-  <input id="entreprise" type="text" placeholder="Mon entreprise VTC">
+  <div class="form-grid">
 
-  <label for="chauffeurTelephone">Téléphone</label>
-  <input id="chauffeurTelephone" type="tel" placeholder="06 00 00 00 00">
 
-  <label for="chauffeurAdresse">Adresse</label>
-  <input id="chauffeurAdresse" type="text" placeholder="Adresse professionnelle">
+    <div class="form-full">
 
-  <label for="siret">SIRET</label>
-  <input id="siret" type="text" placeholder="12345678900000">
+      <label for="entreprise">
+        Raison sociale / entreprise
+      </label>
 
-  <label for="immatriculation">Immatriculation</label>
-  <input id="immatriculation" type="text" placeholder="AB-123-CD">
+      <input
+        id="entreprise"
+        type="text"
+        placeholder="Mon entreprise VTC"
+      >
 
-  <button class="secondary" onclick="saveDriver()">
+    </div>
+
+
+    <div>
+
+      <label for="siret">
+        SIRET
+      </label>
+
+      <input
+        id="siret"
+        type="text"
+        placeholder="12345678900000"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="evtc">
+        N° EVTC
+      </label>
+
+      <input
+        id="evtc"
+        type="text"
+        placeholder="EVTC-123456"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="chauffeurTelephone">
+        Téléphone
+      </label>
+
+      <input
+        id="chauffeurTelephone"
+        type="tel"
+        placeholder="06 00 00 00 00"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="email">
+        E-mail
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="contact@entreprise.fr"
+      >
+
+    </div>
+
+
+    <div class="form-full">
+
+      <label for="chauffeurAdresse">
+        Adresse professionnelle
+      </label>
+
+      <input
+        id="chauffeurAdresse"
+        type="text"
+        placeholder="Adresse professionnelle"
+      >
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FORMULAIRE CHAUFFEUR / VEHICULE
+===================================================== -->
+
+<div class="card no-print">
+
+  <div class="card-title">
+
+    <div class="icon">
+      🚘
+    </div>
+
+    <div>
+
+      <h2>
+        Chauffeur et véhicule
+      </h2>
+
+      <div class="card-subtitle">
+        Informations affichées automatiquement sur le bon.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-full">
+
+      <label for="chauffeurNom">
+        Nom / prénom du chauffeur
+      </label>
+
+      <input
+        id="chauffeurNom"
+        type="text"
+        placeholder="Jean Dupont"
+      >
+
+    </div>
+
+
+    <div class="form-full">
+
+      <label for="cartePro">
+        N° de carte professionnelle
+      </label>
+
+      <input
+        id="cartePro"
+        type="text"
+        placeholder="CP-123456"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="marque">
+        Marque du véhicule
+      </label>
+
+      <input
+        id="marque"
+        type="text"
+        placeholder="Mercedes"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="modele">
+        Modèle
+      </label>
+
+      <input
+        id="modele"
+        type="text"
+        placeholder="Classe E"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="couleur">
+        Couleur
+      </label>
+
+      <input
+        id="couleur"
+        type="text"
+        placeholder="Noir"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="immatriculation">
+        Immatriculation
+      </label>
+
+      <input
+        id="immatriculation"
+        type="text"
+        placeholder="AB-123-CD"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <button
+    class="secondary"
+    onclick="saveDriver()"
+  >
     💾 Enregistrer mes informations
   </button>
 
 </div>
 
 
-<!-- =========================
-     GENERATION
-========================= -->
+
+<!-- =====================================================
+     GENERATION COURSE
+===================================================== -->
 
 <div class="card no-print">
 
   <div class="card-title">
-    <div class="icon">📍</div>
+
+    <div class="icon">
+      📍
+    </div>
 
     <div>
-      <h2>Nouvelle course</h2>
+
+      <h2>
+        Nouvelle course
+      </h2>
+
       <div class="card-subtitle">
-        Génère automatiquement une course fictive autour de votre position.
+        La prise en charge est automatiquement
+        programmée entre 20 et 45 minutes.
       </div>
+
     </div>
+
   </div>
 
-  <button id="generateButton"
-          class="primary"
-          onclick="generateCourse()">
+
+  <button
+    id="generateButton"
+    class="primary"
+    onclick="generateCourse()"
+  >
     🚗 Générer une course
   </button>
 
-  <div id="status" class="status hidden"></div>
+
+  <div
+    id="status"
+    class="status hidden"
+  ></div>
 
 </div>
 
 
-<!-- =========================
-     RESULTAT
-========================= -->
 
-<div id="resultCard" class="card hidden">
+<!-- =====================================================
+     RESULTAT
+===================================================== -->
+
+<div
+  id="resultCard"
+  class="card hidden"
+>
+
 
 <div class="bon">
 
-  <!-- FILIGRANE -->
+
   <div class="watermark">
     DONNÉES DE TEST
   </div>
 
+
   <div class="bon-content">
 
-    <!-- =====================
+
+    <!-- =================================================
          EN-TÊTE
-    ====================== -->
+    ================================================== -->
 
     <div class="bon-top">
+
 
       <div class="company-block">
 
@@ -682,10 +1155,28 @@ button:disabled {
           Entreprise VTC
         </h2>
 
+
         <div class="company-details">
-          SIREN <span id="bonSiren">Siren</span>
-          &nbsp;·&nbsp;
-          EVTC <span id="bonEvtc">Evtc</span>
+
+          Adresse :
+          <span id="bonAdresseHeader">
+            Non renseignée
+          </span>
+
+          <br>
+
+          SIRET :
+          <span id="bonSiretHeader">
+            Non renseigné
+          </span>
+
+          <br>
+
+          Téléphone :
+          <span id="bonTelephoneHeader">
+            Non renseigné
+          </span>
+
         </div>
 
       </div>
@@ -693,10 +1184,15 @@ button:disabled {
 
       <div class="order-block">
 
-        <h1>BON DE COMMANDE</h1>
+        <h1>
+          BON DE COMMANDE
+        </h1>
 
-        <div id="bonNumero" class="order-number">
-          BC-ESSAI-DEMO
+        <div
+          id="bonNumero"
+          class="order-number"
+        >
+          BC-ESSAI
         </div>
 
         <div class="reservation-label">
@@ -708,9 +1204,10 @@ button:disabled {
     </div>
 
 
-    <!-- =====================
+
+    <!-- =================================================
          JUSTIFICATION
-    ====================== -->
+    ================================================== -->
 
     <div class="justification">
 
@@ -719,19 +1216,23 @@ button:disabled {
       </div>
 
       <div class="justification-text">
-        Article L3122-9 du Code des transports -
-        Arrêté du 6 août 2025
+
+        Document généré à titre de démonstration.
+        Les informations et la course présentées
+        sont fictives.
+
       </div>
 
     </div>
 
 
-    <!-- =====================
-         PRISE EN CHARGE /
-         DESTINATION
-    ====================== -->
+
+    <!-- =================================================
+         PRISE EN CHARGE / DESTINATION
+    ================================================== -->
 
     <div class="route-box">
+
 
       <div class="route-column">
 
@@ -739,13 +1240,19 @@ button:disabled {
           PRISE EN CHARGE
         </div>
 
-        <div id="bDepart"
-             class="route-address">
+
+        <div
+          id="bDepart"
+          class="route-address"
+        >
           -
         </div>
 
-        <div id="bCourseDate"
-             class="route-date">
+
+        <div
+          id="bCourseDate"
+          class="route-date"
+        >
           -
         </div>
 
@@ -758,26 +1265,43 @@ button:disabled {
           DESTINATION
         </div>
 
-        <div id="bArrivee"
-             class="route-address">
+
+        <div
+          id="bArrivee"
+          class="route-address"
+        >
           -
         </div>
 
-        <div id="bDistance"
-             class="route-distance">
+
+        <div
+          id="bDistance"
+          class="route-distance"
+        >
+          -
+        </div>
+
+
+        <div
+          id="bDuree"
+          class="route-distance"
+        >
           -
         </div>
 
       </div>
 
+
     </div>
 
 
-    <!-- =====================
+
+    <!-- =================================================
          EXPLOITANT / CLIENT
-    ====================== -->
+    ================================================== -->
 
     <div class="info-grid">
+
 
       <!-- EXPLOITANT -->
 
@@ -787,31 +1311,92 @@ button:disabled {
           EXPLOITANT VTC
         </div>
 
+
         <div class="info-body">
 
-          <div class="info-row">
-            <strong>Raison sociale</strong>
-            <span id="bEntreprise">-</span>
-          </div>
 
           <div class="info-row">
-            <strong>SIREN</strong>
-            <span id="bSiret">-</span>
+
+            <strong>
+              Raison sociale
+            </strong>
+
+            <span id="bEntreprise">
+              -
+            </span>
+
           </div>
 
-          <div class="info-row">
-            <strong>N° EVTC</strong>
-            <span id="bEvtc">-</span>
-          </div>
 
           <div class="info-row">
-            <strong>Téléphone</strong>
-            <span id="bTelephone">-</span>
+
+            <strong>
+              Adresse
+            </strong>
+
+            <span id="bAdresse">
+              -
+            </span>
+
           </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              SIRET
+            </strong>
+
+            <span id="bSiret">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              N° EVTC
+            </strong>
+
+            <span id="bEvtc">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              Téléphone
+            </strong>
+
+            <span id="bTelephone">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              E-mail
+            </strong>
+
+            <span id="bEmail">
+              -
+            </span>
+
+          </div>
+
 
         </div>
 
       </div>
+
 
 
       <!-- CLIENT -->
@@ -822,127 +1407,261 @@ button:disabled {
           CLIENT
         </div>
 
+
         <div class="info-body">
 
-          <div class="info-row">
-            <strong>Nom</strong>
-            <span id="bClient">-</span>
-          </div>
 
           <div class="info-row">
-            <strong>Téléphone</strong>
-            <span id="bClientTel">-</span>
-          </div>
 
-          <div class="info-row">
-            <strong>Commande</strong>
-            <span id="bCommande">-</span>
-          </div>
+            <strong>
+              Nom
+            </strong>
 
-          <div class="info-row">
-            <strong>Réservation</strong>
-            <span id="bReservation">
-              BC-ESSAI-DEMO
+            <span id="bClient">
+              -
             </span>
+
           </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              Téléphone
+            </strong>
+
+            <span id="bClientTel">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              Commande
+            </strong>
+
+            <span id="bCommande">
+              -
+            </span>
+
+          </div>
+
 
         </div>
 
       </div>
 
+
     </div>
 
 
-    <!-- =====================
+
+    <!-- =================================================
          CHAUFFEUR ET VEHICULE
-    ====================== -->
+    ================================================== -->
 
     <div class="section-block">
 
+
       <div class="section-title">
-        CHAUFFEUR ET VEHICULE
+        CHAUFFEUR ET VÉHICULE
       </div>
 
-      <div class="driver-row">
-        <strong>Chauffeur</strong>
-        <span id="bChauffeur">-</span>
-      </div>
 
       <div class="driver-row">
-        <strong>Carte professionnelle</strong>
-        <span id="bCarte">-</span>
+
+        <strong>
+          Chauffeur
+        </strong>
+
+        <span id="bChauffeur">
+          -
+        </span>
+
       </div>
 
-      <div class="driver-row">
-        <strong>Véhicule</strong>
-        <span id="bVehicule">-</span>
-      </div>
 
       <div class="driver-row">
-        <strong>Immatriculation</strong>
-        <span id="bImmat">-</span>
+
+        <strong>
+          Carte professionnelle
+        </strong>
+
+        <span id="bCartePro">
+          -
+        </span>
+
       </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Marque
+        </strong>
+
+        <span id="bMarque">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Modèle
+        </strong>
+
+        <span id="bModele">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Couleur
+        </strong>
+
+        <span id="bCouleur">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Immatriculation
+        </strong>
+
+        <span id="bImmat">
+          -
+        </span>
+
+      </div>
+
 
     </div>
 
 
-    <!-- =====================
+
+    <!-- =================================================
          TARIFICATION
-    ====================== -->
+    ================================================== -->
 
     <div class="pricing">
+
 
       <div class="pricing-title">
         TARIFICATION
       </div>
 
-      <div class="pricing-line">
+
+      <div class="pricing-row">
 
         <div class="pricing-label">
-          Prix forfaitaire convenu
+          Distance
         </div>
 
-        <div class="pricing-price">
-          <span id="bPrix">0,00</span>
-          <small>EUR TTC</small>
+        <div
+          id="prixDistance"
+          class="pricing-value"
+        >
+          -
         </div>
 
       </div>
 
+
+      <div class="pricing-row">
+
+        <div class="pricing-label">
+          Tarif kilométrique
+        </div>
+
+        <div
+          id="prixKm"
+          class="pricing-value"
+        >
+          -
+        </div>
+
+      </div>
+
+
+      <div class="pricing-total">
+
+        <div class="total-label">
+          MONTANT TOTAL
+        </div>
+
+
+        <div class="total-price">
+
+          <span id="bPrix">
+            0,00
+          </span>
+
+          <small>
+            EUR TTC
+          </small>
+
+        </div>
+
+      </div>
+
+
     </div>
+
 
   </div>
 
 </div>
 
 
-<!-- =========================
-     BOUTONS
-========================= -->
+
+<!-- =====================================================
+     ACTIONS
+===================================================== -->
 
 <div class="no-print">
 
-  <button class="success"
-          onclick="window.print()">
+  <button
+    class="success"
+    onclick="window.print()"
+  >
     📄 Imprimer / enregistrer en PDF
   </button>
 
-  <button class="primary"
-          onclick="generateCourse()">
+
+  <button
+    class="primary"
+    onclick="generateCourse()"
+  >
     🔄 Générer une autre course
   </button>
 
 </div>
 
+
 </div>
 
 </div>
+
 
 
 <script>
 
 /* =====================================================
-   DONNEES FICTIVES
+   DONNEES CLIENT FICTIVES
 ===================================================== */
 
 const prenoms = [
@@ -967,6 +1686,7 @@ const prenoms = [
   "Léa",
   "Alice"
 ];
+
 
 const noms = [
   "Martin",
@@ -999,7 +1719,10 @@ const noms = [
 function randomItem(array) {
 
   return array[
-    Math.floor(Math.random() * array.length)
+    Math.floor(
+      Math.random() *
+      array.length
+    )
   ];
 
 }
@@ -1007,7 +1730,11 @@ function randomItem(array) {
 
 function randomNumber(min, max) {
 
-  return Math.random() * (max - min) + min;
+  return (
+    Math.random() *
+    (max - min)
+    + min
+  );
 
 }
 
@@ -1015,14 +1742,25 @@ function randomNumber(min, max) {
 function randomInt(min, max) {
 
   return Math.floor(
-    Math.random() * (max - min + 1)
+    Math.random() *
+    (max - min + 1)
   ) + min;
 
 }
 
 
+function formatEuro(value) {
+
+  return value
+    .toFixed(2)
+    .replace(".", ",")
+    + " €";
+
+}
+
+
 /* =====================================================
-   SAUVEGARDE CHAUFFEUR
+   SAUVEGARDE DES INFORMATIONS
 ===================================================== */
 
 function saveDriver() {
@@ -1030,32 +1768,88 @@ function saveDriver() {
   const data = {
 
     nom:
-      document.getElementById("chauffeurNom").value.trim(),
+      document
+        .getElementById("chauffeurNom")
+        .value
+        .trim(),
 
     entreprise:
-      document.getElementById("entreprise").value.trim(),
+      document
+        .getElementById("entreprise")
+        .value
+        .trim(),
 
     telephone:
-      document.getElementById("chauffeurTelephone").value.trim(),
+      document
+        .getElementById("chauffeurTelephone")
+        .value
+        .trim(),
 
     adresse:
-      document.getElementById("chauffeurAdresse").value.trim(),
+      document
+        .getElementById("chauffeurAdresse")
+        .value
+        .trim(),
+
+    email:
+      document
+        .getElementById("email")
+        .value
+        .trim(),
 
     siret:
-      document.getElementById("siret").value.trim(),
+      document
+        .getElementById("siret")
+        .value
+        .trim(),
+
+    evtc:
+      document
+        .getElementById("evtc")
+        .value
+        .trim(),
+
+    cartePro:
+      document
+        .getElementById("cartePro")
+        .value
+        .trim(),
+
+    marque:
+      document
+        .getElementById("marque")
+        .value
+        .trim(),
+
+    modele:
+      document
+        .getElementById("modele")
+        .value
+        .trim(),
+
+    couleur:
+      document
+        .getElementById("couleur")
+        .value
+        .trim(),
 
     immatriculation:
-      document.getElementById("immatriculation").value.trim()
+      document
+        .getElementById("immatriculation")
+        .value
+        .trim()
 
   };
+
 
   localStorage.setItem(
     "chauffeur",
     JSON.stringify(data)
   );
 
+
   showStatus(
-    "✅ Informations chauffeur enregistrées.",
+    "✅ Informations enregistrées.",
     "success-status"
   );
 
@@ -1063,47 +1857,91 @@ function saveDriver() {
 
 
 /* =====================================================
-   CHARGEMENT CHAUFFEUR
+   CHARGEMENT DES INFORMATIONS
 ===================================================== */
 
 function loadDriver() {
 
   const saved =
-    localStorage.getItem("chauffeur");
+    localStorage.getItem(
+      "chauffeur"
+    );
 
-  if (!saved) return;
+
+  if (!saved) {
+    return;
+  }
+
 
   try {
 
-    const data = JSON.parse(saved);
+    const data =
+      JSON.parse(saved);
 
-    document.getElementById(
-      "chauffeurNom"
-    ).value = data.nom || "";
 
-    document.getElementById(
-      "entreprise"
-    ).value = data.entreprise || "";
+    const fields = {
 
-    document.getElementById(
-      "chauffeurTelephone"
-    ).value = data.telephone || "";
+      chauffeurNom:
+        data.nom,
 
-    document.getElementById(
-      "chauffeurAdresse"
-    ).value = data.adresse || "";
+      entreprise:
+        data.entreprise,
 
-    document.getElementById(
-      "siret"
-    ).value = data.siret || "";
+      chauffeurTelephone:
+        data.telephone,
 
-    document.getElementById(
-      "immatriculation"
-    ).value = data.immatriculation || "";
+      chauffeurAdresse:
+        data.adresse,
 
-  } catch (error) {
+      email:
+        data.email,
 
-    console.error(error);
+      siret:
+        data.siret,
+
+      evtc:
+        data.evtc,
+
+      cartePro:
+        data.cartePro,
+
+      marque:
+        data.marque,
+
+      modele:
+        data.modele,
+
+      couleur:
+        data.couleur,
+
+      immatriculation:
+        data.immatriculation
+
+    };
+
+
+    Object.keys(fields)
+      .forEach(id => {
+
+        const element =
+          document.getElementById(id);
+
+        if (element) {
+
+          element.value =
+            fields[id] || "";
+
+        }
+
+      });
+
+
+  } catch(error) {
+
+    console.error(
+      "Erreur de chargement :",
+      error
+    );
 
   }
 
@@ -1114,22 +1952,36 @@ function loadDriver() {
    STATUS
 ===================================================== */
 
-function showStatus(message, type = "") {
+function showStatus(
+  message,
+  type = ""
+) {
 
   const status =
-    document.getElementById("status");
+    document.getElementById(
+      "status"
+    );
 
-  status.textContent = message;
+
+  status.textContent =
+    message;
+
 
   status.className =
     "status " + type;
 
-  clearTimeout(window.statusTimeout);
+
+  clearTimeout(
+    window.statusTimeout
+  );
+
 
   window.statusTimeout =
     setTimeout(() => {
 
-      status.classList.add("hidden");
+      status.classList.add(
+        "hidden"
+      );
 
     }, 5000);
 
@@ -1154,7 +2006,9 @@ function getLocation() {
         );
 
         return;
+
       }
+
 
       navigator.geolocation.getCurrentPosition(
 
@@ -1179,9 +2033,13 @@ function getLocation() {
         },
 
         {
+
           enableHighAccuracy: true,
+
           timeout: 15000,
+
           maximumAge: 60000
+
         }
 
       );
@@ -1196,21 +2054,38 @@ function getLocation() {
    POINT GPS ALEATOIRE
 ===================================================== */
 
-function randomPoint(lat, lon, distanceKm) {
+function randomPoint(
+  lat,
+  lon,
+  distanceKm
+) {
 
   const angle =
-    Math.random() * Math.PI * 2;
+    Math.random() *
+    Math.PI *
+    2;
 
-  const earthRadius = 6371;
+
+  const earthRadius =
+    6371;
+
 
   const distanceRad =
-    distanceKm / earthRadius;
+    distanceKm /
+    earthRadius;
+
 
   const latRad =
-    lat * Math.PI / 180;
+    lat *
+    Math.PI /
+    180;
+
 
   const lonRad =
-    lon * Math.PI / 180;
+    lon *
+    Math.PI /
+    180;
+
 
   const newLat =
     Math.asin(
@@ -1225,6 +2100,7 @@ function randomPoint(lat, lon, distanceKm) {
       Math.cos(angle)
 
     );
+
 
   const newLon =
 
@@ -1247,15 +2123,91 @@ function randomPoint(lat, lon, distanceKm) {
 
     );
 
+
   return {
 
     lat:
-      newLat * 180 / Math.PI,
+      newLat *
+      180 /
+      Math.PI,
 
     lon:
-      newLon * 180 / Math.PI
+      newLon *
+      180 /
+      Math.PI
 
   };
+
+}
+
+
+/* =====================================================
+   DISTANCE GPS REELLE
+===================================================== */
+
+function calculateDistanceKm(
+  point1,
+  point2
+) {
+
+  const R =
+    6371;
+
+
+  const lat1 =
+    point1.lat *
+    Math.PI /
+    180;
+
+
+  const lat2 =
+    point2.lat *
+    Math.PI /
+    180;
+
+
+  const deltaLat =
+    (
+      point2.lat -
+      point1.lat
+    ) *
+    Math.PI /
+    180;
+
+
+  const deltaLon =
+    (
+      point2.lon -
+      point1.lon
+    ) *
+    Math.PI /
+    180;
+
+
+  const a =
+
+    Math.sin(
+      deltaLat / 2
+    ) ** 2
+
+    +
+
+    Math.cos(lat1) *
+    Math.cos(lat2) *
+    Math.sin(
+      deltaLon / 2
+    ) ** 2;
+
+
+  const c =
+    2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1 - a)
+    );
+
+
+  return R * c;
 
 }
 
@@ -1267,23 +2219,39 @@ function randomPoint(lat, lon, distanceKm) {
 async function reverseGeocode(point) {
 
   const url =
+
     "https://nominatim.openstreetmap.org/reverse" +
+
     "?format=jsonv2" +
+
     "&lat=" +
-    encodeURIComponent(point.lat) +
+    encodeURIComponent(
+      point.lat
+    ) +
+
     "&lon=" +
-    encodeURIComponent(point.lon) +
+    encodeURIComponent(
+      point.lon
+    ) +
+
     "&zoom=18" +
+
     "&addressdetails=1";
 
+
   const response =
-    await fetch(url, {
+    await fetch(
+      url,
+      {
 
-      headers: {
-        "Accept": "application/json"
+        headers: {
+          "Accept":
+            "application/json"
+        }
+
       }
+    );
 
-    });
 
   if (!response.ok) {
 
@@ -1293,12 +2261,16 @@ async function reverseGeocode(point) {
 
   }
 
+
   const data =
     await response.json();
 
+
   return (
 
-    data.display_name ||
+    data.display_name
+
+    ||
 
     `${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}`
 
@@ -1316,13 +2288,20 @@ function generatePhone() {
   return (
 
     "06 " +
-    randomInt(10, 99) +
+
+    randomInt(10,99) +
+
     " " +
-    randomInt(10, 99) +
+
+    randomInt(10,99) +
+
     " " +
-    randomInt(10, 99) +
+
+    randomInt(10,99) +
+
     " " +
-    randomInt(10, 99)
+
+    randomInt(10,99)
 
   );
 
@@ -1361,7 +2340,7 @@ function formatDate(date) {
 
 
 /* =====================================================
-   NUMERO
+   NUMERO DU BON
 ===================================================== */
 
 function generateNumber() {
@@ -1391,17 +2370,32 @@ function generateNumber() {
 async function generateCourse() {
 
   const buttons =
-    document.querySelectorAll(".primary");
+    document.querySelectorAll(
+      ".primary"
+    );
 
-  buttons.forEach(button => {
-    button.disabled = true;
-  });
+
+  buttons.forEach(
+    button => {
+
+      button.disabled =
+        true;
+
+    }
+  );
+
 
   showStatus(
     "📍 Récupération de votre position..."
   );
 
+
   try {
+
+
+    /* ================================================
+       POSITION
+    ================================================= */
 
     const position =
       await getLocation();
@@ -1412,32 +2406,60 @@ async function generateCourse() {
     );
 
 
-    /*
-      Course fictive :
-      départ entre 2 et 7 km
-      destination entre 20 et 40 km
-    */
+    /* ================================================
+       DEPART
+    ================================================= */
 
     const distanceDepart =
-      randomNumber(2, 7);
+      randomNumber(
+        2,
+        7
+      );
 
-    const distanceArrivee =
-      randomNumber(20, 40);
+
+    /* ================================================
+       ARRIVEE
+    ================================================= */
+
+    const distanceDestination =
+      randomNumber(
+        20,
+        40
+      );
 
 
     const departPoint =
       randomPoint(
+
         position.lat,
+
         position.lon,
+
         distanceDepart
+
       );
 
 
     const arriveePoint =
       randomPoint(
+
         position.lat,
+
         position.lon,
-        distanceArrivee
+
+        distanceDestination
+
+      );
+
+
+    /* ================================================
+       DISTANCE DEPART → ARRIVEE
+    ================================================= */
+
+    const distanceReelle =
+      calculateDistanceKm(
+        departPoint,
+        arriveePoint
       );
 
 
@@ -1451,66 +2473,135 @@ async function generateCourse() {
       arrivee
     ] = await Promise.all([
 
-      reverseGeocode(departPoint),
+      reverseGeocode(
+        departPoint
+      ),
 
-      reverseGeocode(arriveePoint)
+      reverseGeocode(
+        arriveePoint
+      )
 
     ]);
 
 
-    /* CLIENT FICTIF */
+    /* ================================================
+       CLIENT FICTIF
+    ================================================= */
 
     const client =
+
       randomItem(prenoms)
+
       +
+
       " "
+
       +
+
       randomItem(noms);
 
 
-    /* DATE DE COURSE */
+    const clientTelephone =
+      generatePhone();
 
-    const date =
+
+    /* ================================================
+       PRISE EN CHARGE
+       
+       ENTRE +20 ET +45 MINUTES
+    ================================================= */
+
+    const courseDate =
       new Date();
 
-    date.setMinutes(
-      date.getMinutes() +
-      randomInt(15, 180)
+
+    const minutesAvantPriseEnCharge =
+      randomInt(
+        20,
+        45
+      );
+
+
+    courseDate.setMinutes(
+
+      courseDate.getMinutes()
+
+      +
+
+      minutesAvantPriseEnCharge
+
     );
 
 
-    /* DURÉE */
+    /* ================================================
+       DUREE
+    ================================================= */
 
     const duree =
-      Math.round(
-        distanceArrivee /
-        0.75 *
-        60
+      Math.max(
+
+        5,
+
+        Math.round(
+
+          distanceReelle /
+          45 *
+          60
+
+        )
+
       );
 
 
-    /* PRIX */
+    /* ================================================
+       TARIF ALEATOIRE
+       
+       ENTRE 2,00 ET 2,50 €/KM
+    ================================================= */
+
+    const tarifKm =
+      randomNumber(
+        2,
+        2.5
+      );
+
+
+    /* ================================================
+       PRIX
+       
+       DISTANCE REELLE × TARIF
+    ================================================= */
 
     const prix =
       Math.round(
-        (
-          distanceArrivee * 2.2 +
-          8
-        ) * 100
+
+        distanceReelle *
+        tarifKm *
+        100
+
       ) / 100;
 
 
-    /* CHAUFFEUR */
+    /* ================================================
+       INFORMATIONS CHAUFFEUR
+    ================================================= */
 
     const chauffeur =
       JSON.parse(
-        localStorage.getItem("chauffeur")
-        || "{}"
+
+        localStorage.getItem(
+          "chauffeur"
+        )
+
+        ||
+
+        "{}"
+
       );
 
 
-    /* =================================================
-       REMPLISSAGE BON
+    /* ================================================
+       NUMERO BON
     ================================================= */
 
     document.getElementById(
@@ -1519,72 +2610,197 @@ async function generateCourse() {
       generateNumber();
 
 
+    /* ================================================
+       EN-TETE EXPLOITANT
+    ================================================= */
+
     document.getElementById(
       "bonEntrepriseHeader"
     ).textContent =
-      chauffeur.entreprise ||
+
+      chauffeur.entreprise
+
+      ||
+
       "Entreprise VTC";
 
 
     document.getElementById(
-      "bonSiren"
+      "bonAdresseHeader"
     ).textContent =
-      chauffeur.siret ||
-      "SIREN";
+
+      chauffeur.adresse
+
+      ||
+
+      "Non renseignée";
 
 
     document.getElementById(
-      "bonEvtc"
+      "bonSiretHeader"
     ).textContent =
-      "EVTC";
 
+      chauffeur.siret
+
+      ||
+
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bonTelephoneHeader"
+    ).textContent =
+
+      chauffeur.telephone
+
+      ||
+
+      "Non renseigné";
+
+
+    /* ================================================
+       EXPLOITANT VTC
+    ================================================= */
 
     document.getElementById(
       "bEntreprise"
     ).textContent =
-      chauffeur.entreprise ||
+
+      chauffeur.entreprise
+
+      ||
+
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bAdresse"
+    ).textContent =
+
+      chauffeur.adresse
+
+      ||
+
       "Non renseignée";
 
 
     document.getElementById(
       "bSiret"
     ).textContent =
-      chauffeur.siret ||
+
+      chauffeur.siret
+
+      ||
+
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bEvtc"
+    ).textContent =
+
+      chauffeur.evtc
+
+      ||
+
       "Non renseigné";
 
 
     document.getElementById(
       "bTelephone"
     ).textContent =
-      chauffeur.telephone ||
+
+      chauffeur.telephone
+
+      ||
+
       "Non renseigné";
 
 
     document.getElementById(
+      "bEmail"
+    ).textContent =
+
+      chauffeur.email
+
+      ||
+
+      "Non renseigné";
+
+
+    /* ================================================
+       CHAUFFEUR
+    ================================================= */
+
+    document.getElementById(
       "bChauffeur"
     ).textContent =
-      chauffeur.nom ||
+
+      chauffeur.nom
+
+      ||
+
       "Non renseigné";
+
+
+    document.getElementById(
+      "bCartePro"
+    ).textContent =
+
+      chauffeur.cartePro
+
+      ||
+
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bMarque"
+    ).textContent =
+
+      chauffeur.marque
+
+      ||
+
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bModele"
+    ).textContent =
+
+      chauffeur.modele
+
+      ||
+
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bCouleur"
+    ).textContent =
+
+      chauffeur.couleur
+
+      ||
+
+      "Non renseignée";
 
 
     document.getElementById(
       "bImmat"
     ).textContent =
-      chauffeur.immatriculation ||
+
+      chauffeur.immatriculation
+
+      ||
+
       "Non renseignée";
 
 
-    document.getElementById(
-      "bCarte"
-    ).textContent =
-      "Donnée de test";
-
-
-    document.getElementById(
-      "bVehicule"
-    ).textContent =
-      "Véhicule VTC";
-
+    /* ================================================
+       CLIENT
+    ================================================= */
 
     document.getElementById(
       "bClient"
@@ -1595,20 +2811,20 @@ async function generateCourse() {
     document.getElementById(
       "bClientTel"
     ).textContent =
-      generatePhone();
+      clientTelephone;
 
 
     document.getElementById(
       "bCommande"
     ).textContent =
-      formatDate(new Date());
+      formatDate(
+        new Date()
+      );
 
 
-    document.getElementById(
-      "bReservation"
-    ).textContent =
-      "BC-ESSAI-DEMO";
-
+    /* ================================================
+       TRAJET
+    ================================================= */
 
     document.getElementById(
       "bDepart"
@@ -1625,32 +2841,80 @@ async function generateCourse() {
     document.getElementById(
       "bCourseDate"
     ).textContent =
-      formatDate(date);
+      formatDate(
+        courseDate
+      );
 
 
     document.getElementById(
       "bDistance"
     ).textContent =
-      distanceArrivee.toFixed(2)
+
+      distanceReelle.toFixed(2)
+
       +
+
       " km";
+
+
+    document.getElementById(
+      "bDuree"
+    ).textContent =
+
+      duree
+
+      +
+
+      " min";
+
+
+    /* ================================================
+       TARIFICATION
+    ================================================= */
+
+    document.getElementById(
+      "prixDistance"
+    ).textContent =
+
+      distanceReelle.toFixed(2)
+
+      +
+
+      " km";
+
+
+    document.getElementById(
+      "prixKm"
+    ).textContent =
+
+      tarifKm.toFixed(2)
+
+      +
+
+      " € / km";
 
 
     document.getElementById(
       "bPrix"
     ).textContent =
+
       prix
         .toFixed(2)
-        .replace(".", ",");
+        .replace(
+          ".",
+          ","
+        );
 
 
-    /* =================================================
+    /* ================================================
        AFFICHAGE
     ================================================= */
 
     document.getElementById(
       "resultCard"
-    ).classList.remove("hidden");
+    ).classList.remove(
+      "hidden"
+    );
 
 
     showStatus(
@@ -1662,49 +2926,76 @@ async function generateCourse() {
     document.getElementById(
       "resultCard"
     ).scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+
+      behavior:
+        "smooth",
+
+      block:
+        "start"
+
     });
 
 
-  } catch (error) {
+  }
+
+
+  catch(error) {
 
     console.error(error);
+
 
     let message =
       "❌ Impossible de générer la course.";
 
-    if (error.code === 1) {
+
+    if (
+      error.code === 1
+    ) {
 
       message =
-        "❌ Localisation refusée. Autorisez la géolocalisation.";
+        "❌ Localisation refusée. Autorisez la géolocalisation dans votre navigateur.";
 
     }
 
-    if (error.code === 2) {
+
+    if (
+      error.code === 2
+    ) {
 
       message =
         "❌ Position impossible à déterminer.";
 
     }
 
-    if (error.code === 3) {
+
+    if (
+      error.code === 3
+    ) {
 
       message =
         "❌ La récupération de votre position a expiré.";
 
     }
 
+
     showStatus(
       message,
       "error"
     );
 
-  } finally {
+  }
 
-    buttons.forEach(button => {
-      button.disabled = false;
-    });
+
+  finally {
+
+    buttons.forEach(
+      button => {
+
+        button.disabled =
+          false;
+
+      }
+    );
 
   }
 
