@@ -3,75 +3,153 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Générateur de bon VTC</title>
+
+<title>Générateur de bons VTC</title>
 
 <style>
+:root {
+  --primary: #24527a;
+  --primary-dark: #173d5b;
+  --green: #25866d;
+  --dark: #1f2937;
+  --text: #374151;
+  --muted: #6b7280;
+  --border: #dfe5ea;
+  --light-blue: #eaf3fd;
+  --light-green: #e9f7f2;
+  --background: #f4f8fb;
+  --white: #ffffff;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f3f4f6;
-  color: #111827;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--text);
 }
 
-header {
-  background: #111827;
+.app-header {
+  background: linear-gradient(135deg, #163b59, #24527a);
   color: white;
-  padding: 18px;
+  padding: 25px 15px;
   text-align: center;
 }
 
-header h1 {
+.app-header .logo {
+  font-size: 38px;
+  margin-bottom: 5px;
+}
+
+.app-header h1 {
   margin: 0;
-  font-size: 22px;
+  font-size: 24px;
+}
+
+.app-header p {
+  margin: 7px 0 0;
+  opacity: .8;
+  font-size: 14px;
 }
 
 .container {
-  max-width: 700px;
+  max-width: 820px;
   margin: auto;
-  padding: 15px;
+  padding: 20px 15px 40px;
 }
 
 .card {
-  background: white;
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 15px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+  background: var(--white);
+  border-radius: 15px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.06);
 }
 
-h2 {
-  font-size: 18px;
-  margin-top: 0;
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.card-title .icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #eff6ff;
+  font-size: 20px;
+}
+
+.card-title h2 {
+  margin: 0;
+  font-size: 19px;
+}
+
+.card-subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 3px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 16px;
+}
+
+.form-full {
+  grid-column: 1 / -1;
 }
 
 label {
   display: block;
-  font-weight: bold;
-  margin-top: 12px;
-  margin-bottom: 5px;
+  margin: 13px 0 6px;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 input {
   width: 100%;
-  padding: 12px;
+  padding: 13px 14px;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 9px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+  transition: .2s;
+}
+
+input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.10);
 }
 
 button {
   width: 100%;
-  padding: 15px;
+  padding: 14px;
   border: 0;
   border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 12px;
+  transition: .2s;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
 }
 
 .primary {
@@ -79,85 +157,2511 @@ button {
   color: white;
 }
 
+.primary:hover {
+  background: #1d4ed8;
+}
+
 .secondary {
-  background: #e5e7eb;
-  color: #111827;
+  background: #eef1f4;
+  color: #1f2937;
 }
 
 .success {
-  background: #16a34a;
+  background: var(--green);
   color: white;
 }
 
 .status {
-  padding: 12px;
-  border-radius: 8px;
+  margin-top: 14px;
+  padding: 13px 15px;
+  border-radius: 9px;
   background: #eff6ff;
   color: #1d4ed8;
-  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status.error {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.status.success-status {
+  background: #f0fdf4;
+  color: #15803d;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
+
+/* BON */
 
 .bon {
   position: relative;
   background: white;
-  padding: 25px;
-  border: 1px solid #ddd;
+  border: 1px solid #dfe5ea;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .watermark {
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-30deg);
-  font-size: 38px;
-  color: rgba(220, 38, 38, .12);
-  font-weight: bold;
-  pointer-events: none;
+  font-size: 60px;
+  font-weight: 900;
+  color: rgba(220,38,38,.10);
   white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
 }
 
-.bon-header {
+.bon-content {
+  position: relative;
+  z-index: 1;
+}
+
+.bon-top {
   display: flex;
   justify-content: space-between;
-  gap: 15px;
-  border-bottom: 2px solid #111827;
-  padding-bottom: 15px;
+  gap: 30px;
+  padding: 28px;
+  border-bottom: 1px solid var(--border);
 }
 
-.info {
-  margin-top: 20px;
-}
-
-.row {
-  display: flex;
-  border-bottom: 1px solid #eee;
-  padding: 10px 0;
-  gap: 10px;
-}
-
-.row strong {
-  min-width: 145px;
-}
-
-.total {
+.company-block h2 {
+  margin: 0 0 10px;
+  color: #16456c;
   font-size: 21px;
-  font-weight: bold;
-  text-align: right;
-  margin-top: 20px;
 }
+
+.company-details {
+  color: #6b7280;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.order-block {
+  text-align: right;
+}
+
+.order-block h1 {
+  margin: 0 0 8px;
+  color: #111827;
+  font-size: 22px;
+}
+
+.order-number {
+  color: #24527a;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.reservation-label {
+  color: #777;
+  font-size: 13px;
+}
+
+/* JUSTIFICATION */
+
+.justification {
+  margin: 28px 28px 0;
+  padding: 15px 18px;
+  border: 1px solid #d9ece6;
+  border-radius: 10px;
+  background: var(--light-green);
+}
+
+.justification-title {
+  color: #257b68;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.justification-text {
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* TRAJET */
+
+.route-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 28px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--light-blue);
+}
+
+.route-column {
+  padding: 20px 22px;
+}
+
+.route-column + .route-column {
+  border-left: 1px solid rgba(120,150,180,.18);
+}
+
+.route-title {
+  color: #25557b;
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.route-address {
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.route-date {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.route-distance {
+  margin-top: 12px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+/* INFOS */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin: 0 28px 28px;
+}
+
+.info-card {
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  overflow: hidden;
+  background: white;
+}
+
+.info-title {
+  padding: 14px 18px;
+  color: #24527a;
+  font-weight: 700;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-body {
+  padding: 7px 18px 13px;
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 125px 1fr;
+  gap: 8px;
+  padding: 7px 0;
+  font-size: 13px;
+}
+
+.info-row strong {
+  color: #5c6875;
+}
+
+.info-row span {
+  color: #374151;
+  word-break: break-word;
+}
+
+/* CHAUFFEUR */
+
+.section-block {
+  margin: 0 28px 28px;
+}
+
+.section-title {
+  color: #24527a;
+  font-weight: 700;
+  font-size: 14px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.driver-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  padding: 7px 4px;
+  font-size: 13px;
+}
+
+.driver-row strong {
+  color: #5c6875;
+}
+
+.driver-row span {
+  color: #374151;
+  word-break: break-word;
+}
+
+/* PRIX */
+
+.pricing {
+  margin: 0 28px 28px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 25px;
+}
+
+.pricing-title {
+  color: #24527a;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 7px 0;
+}
+
+.pricing-label {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.pricing-value {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.pricing-total {
+  margin-top: 15px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  color: #24527a;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.total-price {
+  color: #25866d;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.total-price small {
+  font-size: 16px;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+  .container {
+    padding: 10px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-full {
+    grid-column: auto;
+  }
+
+  .bon-top {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .order-block {
+    text-align: left;
+  }
+
+  .route-box {
+    grid-template-columns: 1fr;
+    margin: 18px;
+  }
+
+  .route-column + .route-column {
+    border-left: none;
+    border-top: 1px solid rgba(120,150,180,.18);
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 0 18px 22px;
+  }
+
+  .section-block {
+    margin: 0 18px 22px;
+  }
+
+  .pricing {
+    margin: 0 18px 22px;
+    padding: 19px;
+  }
+
+  .pricing-total {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+
+  .watermark {
+    font-size: 38px;
+  }
+}
+
+/* IMPRESSION */
 
 @media print {
+
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
   body {
     background: white;
   }
 
-  header,
+  .app-header,
   .no-print {
     display: none !important;
   }
 
   .container {
+    max-width: none;
+    padding: 0;
+  }
+
+  .card {
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .bon {
+    border: none;
+    border-radius: 0;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="app-header no-print">
+
+  <div class="logo">🚗</div>
+
+  <h1>
+    Générateur de bons VTC
+  </h1>
+
+  <p>
+    Création de bons de commande — mode démonstration
+  </p>
+
+</header>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     EXPLOITANT
+===================================================== -->
+
+<div class="card no-print">
+
+  <div class="card-title">
+
+    <div class="icon">🏢</div>
+
+    <div>
+
+      <h2>
+        Informations exploitant VTC
+      </h2>
+
+      <div class="card-subtitle">
+        Ces informations seront reprises automatiquement
+        sur le bon.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-full">
+
+      <label for="entreprise">
+        Raison sociale / entreprise
+      </label>
+
+      <input
+        id="entreprise"
+        type="text"
+        placeholder="Mon entreprise VTC"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="siret">
+        SIRET
+      </label>
+
+      <input
+        id="siret"
+        type="text"
+        placeholder="12345678900000"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="evtc">
+        N° EVTC
+      </label>
+
+      <input
+        id="evtc"
+        type="text"
+        placeholder="EVTC-123456"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="chauffeurTelephone">
+        Téléphone
+      </label>
+
+      <input
+        id="chauffeurTelephone"
+        type="tel"
+        placeholder="06 00 00 00 00"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="email">
+        E-mail
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        placeholder="contact@entreprise.fr"
+      >
+
+    </div>
+
+
+    <div class="form-full">
+
+      <label for="chauffeurAdresse">
+        Adresse professionnelle
+      </label>
+
+      <input
+        id="chauffeurAdresse"
+        type="text"
+        placeholder="Adresse professionnelle"
+      >
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     CHAUFFEUR / VEHICULE
+===================================================== -->
+
+<div class="card no-print">
+
+  <div class="card-title">
+
+    <div class="icon">🚘</div>
+
+    <div>
+
+      <h2>
+        Chauffeur et véhicule
+      </h2>
+
+      <div class="card-subtitle">
+        Ces informations seront reprises sur le bon.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="form-grid">
+
+
+    <div class="form-full">
+
+      <label for="chauffeurNom">
+        Nom / prénom du chauffeur
+      </label>
+
+      <input
+        id="chauffeurNom"
+        type="text"
+        placeholder="Jean Dupont"
+      >
+
+    </div>
+
+
+    <div class="form-full">
+
+      <label for="cartePro">
+        N° de carte professionnelle
+      </label>
+
+      <input
+        id="cartePro"
+        type="text"
+        placeholder="CP-123456"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="marque">
+        Marque du véhicule
+      </label>
+
+      <input
+        id="marque"
+        type="text"
+        placeholder="Mercedes"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="modele">
+        Modèle
+      </label>
+
+      <input
+        id="modele"
+        type="text"
+        placeholder="Classe E"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="couleur">
+        Couleur
+      </label>
+
+      <input
+        id="couleur"
+        type="text"
+        placeholder="Noir"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label for="immatriculation">
+        Immatriculation
+      </label>
+
+      <input
+        id="immatriculation"
+        type="text"
+        placeholder="AB-123-CD"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <button
+    class="secondary"
+    onclick="saveDriver()"
+  >
+    💾 Enregistrer mes informations
+  </button>
+
+</div>
+
+
+<!-- =====================================================
+     GENERATION
+===================================================== -->
+
+<div class="card no-print">
+
+  <div class="card-title">
+
+    <div class="icon">📍</div>
+
+    <div>
+
+      <h2>
+        Nouvelle course
+      </h2>
+
+      <div class="card-subtitle">
+        La prise en charge sera automatiquement
+        programmée entre 20 et 45 minutes.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    id="generateButton"
+    class="primary"
+    onclick="generateCourse()"
+  >
+    🚗 Générer une course
+  </button>
+
+
+  <div
+    id="status"
+    class="status hidden"
+  ></div>
+
+</div>
+
+
+<!-- =====================================================
+     RESULTAT
+===================================================== -->
+
+<div
+  id="resultCard"
+  class="card hidden"
+>
+
+
+<div class="bon">
+
+
+  <div class="watermark">
+    DONNÉES DE TEST
+  </div>
+
+
+  <div class="bon-content">
+
+
+    <!-- EN-TETE -->
+
+    <div class="bon-top">
+
+      <div class="company-block">
+
+        <h2 id="bonEntrepriseHeader">
+          Entreprise VTC
+        </h2>
+
+        <div class="company-details">
+
+          Adresse :
+          <span id="bonAdresseHeader">
+            Non renseignée
+          </span>
+
+          <br>
+
+          SIRET :
+          <span id="bonSiretHeader">
+            Non renseigné
+          </span>
+
+          <br>
+
+          Téléphone :
+          <span id="bonTelephoneHeader">
+            Non renseigné
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="order-block">
+
+        <h1>
+          BON DE COMMANDE
+        </h1>
+
+        <div
+          id="bonNumero"
+          class="order-number"
+        >
+        </div>
+
+        <div class="reservation-label">
+          Réservation préalable VTC
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- JUSTIFICATION -->
+
+    <div class="justification">
+
+      <div class="justification-title">
+        Justification de la réservation préalable
+      </div>
+
+      <div class="justification-text">
+        Document généré à titre de démonstration.
+        Les informations et la course présentées
+        sont fictives.
+      </div>
+
+    </div>
+
+
+    <!-- TRAJET -->
+
+    <div class="route-box">
+
+
+      <div class="route-column">
+
+        <div class="route-title">
+          PRISE EN CHARGE
+        </div>
+
+        <div
+          id="bDepart"
+          class="route-address"
+        >
+          -
+        </div>
+
+        <div
+          id="bCourseDate"
+          class="route-date"
+        >
+          -
+        </div>
+
+      </div>
+
+
+      <div class="route-column">
+
+        <div class="route-title">
+          DESTINATION
+        </div>
+
+        <div
+          id="bArrivee"
+          class="route-address"
+        >
+          -
+        </div>
+
+        <div
+          id="bDistance"
+          class="route-distance"
+        >
+          -
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- EXPLOITANT / CLIENT -->
+
+    <div class="info-grid">
+
+
+      <div class="info-card">
+
+        <div class="info-title">
+          EXPLOITANT VTC
+        </div>
+
+
+        <div class="info-body">
+
+
+          <div class="info-row">
+
+            <strong>
+              Raison sociale
+            </strong>
+
+            <span id="bEntreprise">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              Adresse
+            </strong>
+
+            <span id="bAdresse">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              SIRET
+            </strong>
+
+            <span id="bSiret">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              N° EVTC
+            </strong>
+
+            <span id="bEvtc">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              Téléphone
+            </strong>
+
+            <span id="bTelephone">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              E-mail
+            </strong>
+
+            <span id="bEmail">
+              -
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- CLIENT -->
+
+      <div class="info-card">
+
+        <div class="info-title">
+          CLIENT
+        </div>
+
+
+        <div class="info-body">
+
+
+          <div class="info-row">
+
+            <strong>
+              Nom
+            </strong>
+
+            <span id="bClient">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              Téléphone
+            </strong>
+
+            <span id="bClientTel">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="info-row">
+
+            <strong>
+              Heure commande
+            </strong>
+
+            <span id="bCommande">
+              -
+            </span>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- CHAUFFEUR VEHICULE -->
+
+    <div class="section-block">
+
+
+      <div class="section-title">
+        CHAUFFEUR ET VÉHICULE
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Chauffeur
+        </strong>
+
+        <span id="bChauffeur">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Carte professionnelle
+        </strong>
+
+        <span id="bCartePro">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Marque
+        </strong>
+
+        <span id="bMarque">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Modèle
+        </strong>
+
+        <span id="bModele">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Couleur
+        </strong>
+
+        <span id="bCouleur">
+          -
+        </span>
+
+      </div>
+
+
+      <div class="driver-row">
+
+        <strong>
+          Immatriculation
+        </strong>
+
+        <span id="bImmat">
+          -
+        </span>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- TARIFICATION -->
+
+    <div class="pricing">
+
+
+      <div class="pricing-title">
+        TARIFICATION
+      </div>
+
+
+      <div class="pricing-row">
+
+        <div class="pricing-label">
+          Distance
+        </div>
+
+        <div
+          id="prixDistance"
+          class="pricing-value"
+        >
+          -
+        </div>
+
+      </div>
+
+
+      <div class="pricing-row">
+
+        <div class="pricing-label">
+          Tarif kilométrique
+        </div>
+
+        <div
+          id="prixKm"
+          class="pricing-value"
+        >
+          -
+        </div>
+
+      </div>
+
+
+      <div class="pricing-total">
+
+        <div class="total-label">
+          MONTANT TOTAL
+        </div>
+
+        <div class="total-price">
+
+          <span id="bPrix">
+            0,00
+          </span>
+
+          <small>
+            EUR TTC
+          </small>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<!-- ACTIONS -->
+
+<div class="no-print">
+
+  <button
+    class="success"
+    onclick="window.print()"
+  >
+    📄 Imprimer / enregistrer en PDF
+  </button>
+
+
+  <button
+    class="primary"
+    onclick="generateCourse()"
+  >
+    🔄 Générer une autre course
+  </button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DONNEES FICTIVES
+===================================================== */
+
+const prenoms = [
+  "Thomas",
+  "Lucas",
+  "Hugo",
+  "Nathan",
+  "Louis",
+  "Gabriel",
+  "Arthur",
+  "Jules",
+  "Maxime",
+  "Antoine",
+  "Emma",
+  "Camille",
+  "Chloé",
+  "Sarah",
+  "Laura",
+  "Manon",
+  "Julie",
+  "Clara",
+  "Léa",
+  "Alice"
+];
+
+const noms = [
+  "Martin",
+  "Bernard",
+  "Dubois",
+  "Thomas",
+  "Robert",
+  "Richard",
+  "Petit",
+  "Durand",
+  "Leroy",
+  "Moreau",
+  "Simon",
+  "Laurent",
+  "Lefebvre",
+  "Michel",
+  "Garcia",
+  "David",
+  "Bertrand",
+  "Roux",
+  "Vincent",
+  "Fournier"
+];
+
+
+/* =====================================================
+   OUTILS
+===================================================== */
+
+function randomItem(array) {
+
+  return array[
+    Math.floor(
+      Math.random() * array.length
+    )
+  ];
+
+}
+
+
+function randomNumber(min, max) {
+
+  return (
+    Math.random() *
+    (max - min)
+    + min
+  );
+
+}
+
+
+function randomInt(min, max) {
+
+  return Math.floor(
+    Math.random() *
+    (max - min + 1)
+  ) + min;
+
+}
+
+
+/* =====================================================
+   SAUVEGARDE
+===================================================== */
+
+function saveDriver() {
+
+  const data = {
+
+    nom:
+      document.getElementById(
+        "chauffeurNom"
+      ).value.trim(),
+
+    entreprise:
+      document.getElementById(
+        "entreprise"
+      ).value.trim(),
+
+    telephone:
+      document.getElementById(
+        "chauffeurTelephone"
+      ).value.trim(),
+
+    adresse:
+      document.getElementById(
+        "chauffeurAdresse"
+      ).value.trim(),
+
+    email:
+      document.getElementById(
+        "email"
+      ).value.trim(),
+
+    siret:
+      document.getElementById(
+        "siret"
+      ).value.trim(),
+
+    evtc:
+      document.getElementById(
+        "evtc"
+      ).value.trim(),
+
+    cartePro:
+      document.getElementById(
+        "cartePro"
+      ).value.trim(),
+
+    marque:
+      document.getElementById(
+        "marque"
+      ).value.trim(),
+
+    modele:
+      document.getElementById(
+        "modele"
+      ).value.trim(),
+
+    couleur:
+      document.getElementById(
+        "couleur"
+      ).value.trim(),
+
+    immatriculation:
+      document.getElementById(
+        "immatriculation"
+      ).value.trim()
+
+  };
+
+
+  localStorage.setItem(
+    "chauffeur",
+    JSON.stringify(data)
+  );
+
+
+  showStatus(
+    "✅ Informations enregistrées.",
+    "success-status"
+  );
+
+}
+
+
+/* =====================================================
+   CHARGEMENT
+===================================================== */
+
+function loadDriver() {
+
+  const saved =
+    localStorage.getItem(
+      "chauffeur"
+    );
+
+
+  if (!saved) {
+    return;
+  }
+
+
+  try {
+
+    const data =
+      JSON.parse(saved);
+
+
+    const fields = {
+
+      chauffeurNom:
+        data.nom,
+
+      entreprise:
+        data.entreprise,
+
+      chauffeurTelephone:
+        data.telephone,
+
+      chauffeurAdresse:
+        data.adresse,
+
+      email:
+        data.email,
+
+      siret:
+        data.siret,
+
+      evtc:
+        data.evtc,
+
+      cartePro:
+        data.cartePro,
+
+      marque:
+        data.marque,
+
+      modele:
+        data.modele,
+
+      couleur:
+        data.couleur,
+
+      immatriculation:
+        data.immatriculation
+
+    };
+
+
+    Object.keys(fields).forEach(
+      id => {
+
+        const element =
+          document.getElementById(id);
+
+        if (element) {
+
+          element.value =
+            fields[id] || "";
+
+        }
+
+      }
+    );
+
+
+  } catch(error) {
+
+    console.error(
+      "Erreur de chargement :",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function showStatus(
+  message,
+  type = ""
+) {
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  status.textContent =
+    message;
+
+
+  status.className =
+    "status " + type;
+
+
+  clearTimeout(
+    window.statusTimeout
+  );
+
+
+  window.statusTimeout =
+    setTimeout(() => {
+
+      status.classList.add(
+        "hidden"
+      );
+
+    }, 5000);
+
+}
+
+
+/* =====================================================
+   GEOLOCALISATION
+===================================================== */
+
+function getLocation() {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      if (!navigator.geolocation) {
+
+        reject(
+          new Error(
+            "La géolocalisation n'est pas disponible."
+          )
+        );
+
+        return;
+
+      }
+
+
+      navigator.geolocation.getCurrentPosition(
+
+        position => {
+
+          resolve({
+
+            lat:
+              position.coords.latitude,
+
+            lon:
+              position.coords.longitude
+
+          });
+
+        },
+
+        error => {
+
+          reject(error);
+
+        },
+
+        {
+
+          enableHighAccuracy: true,
+
+          timeout: 15000,
+
+          maximumAge: 60000
+
+        }
+
+      );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   POINT GPS ALEATOIRE
+===================================================== */
+
+function randomPoint(
+  lat,
+  lon,
+  distanceKm
+) {
+
+  const angle =
+    Math.random() *
+    Math.PI *
+    2;
+
+
+  const earthRadius =
+    6371;
+
+
+  const distanceRad =
+    distanceKm /
+    earthRadius;
+
+
+  const latRad =
+    lat *
+    Math.PI /
+    180;
+
+
+  const lonRad =
+    lon *
+    Math.PI /
+    180;
+
+
+  const newLat =
+    Math.asin(
+
+      Math.sin(latRad) *
+      Math.cos(distanceRad)
+
+      +
+
+      Math.cos(latRad) *
+      Math.sin(distanceRad) *
+      Math.cos(angle)
+
+    );
+
+
+  const newLon =
+
+    lonRad
+
+    +
+
+    Math.atan2(
+
+      Math.sin(angle) *
+      Math.sin(distanceRad) *
+      Math.cos(latRad),
+
+      Math.cos(distanceRad)
+
+      -
+
+      Math.sin(latRad) *
+      Math.sin(newLat)
+
+    );
+
+
+  return {
+
+    lat:
+      newLat *
+      180 /
+      Math.PI,
+
+    lon:
+      newLon *
+      180 /
+      Math.PI
+
+  };
+
+}
+
+
+/* =====================================================
+   DISTANCE GPS
+===================================================== */
+
+function calculateDistanceKm(
+  point1,
+  point2
+) {
+
+  const R = 6371;
+
+
+  const lat1 =
+    point1.lat *
+    Math.PI /
+    180;
+
+
+  const lat2 =
+    point2.lat *
+    Math.PI /
+    180;
+
+
+  const deltaLat =
+    (
+      point2.lat -
+      point1.lat
+    ) *
+    Math.PI /
+    180;
+
+
+  const deltaLon =
+    (
+      point2.lon -
+      point1.lon
+    ) *
+    Math.PI /
+    180;
+
+
+  const a =
+
+    Math.sin(
+      deltaLat / 2
+    ) ** 2
+
+    +
+
+    Math.cos(lat1) *
+    Math.cos(lat2) *
+    Math.sin(
+      deltaLon / 2
+    ) ** 2;
+
+
+  const c =
+    2 *
+    Math.atan2(
+      Math.sqrt(a),
+      Math.sqrt(1 - a)
+    );
+
+
+  return R * c;
+
+}
+
+
+/* =====================================================
+   REVERSE GEOCODING
+===================================================== */
+
+async function reverseGeocode(point) {
+
+  const url =
+
+    "https://nominatim.openstreetmap.org/reverse" +
+
+    "?format=jsonv2" +
+
+    "&lat=" +
+    encodeURIComponent(point.lat) +
+
+    "&lon=" +
+    encodeURIComponent(point.lon) +
+
+    "&zoom=18" +
+
+    "&addressdetails=1";
+
+
+  const response =
+    await fetch(
+      url,
+      {
+        headers: {
+          "Accept":
+            "application/json"
+        }
+      }
+    );
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      "Impossible de récupérer l'adresse."
+    );
+
+  }
+
+
+  const data =
+    await response.json();
+
+
+  return (
+
+    data.display_name
+
+    ||
+
+    `${point.lat.toFixed(5)}, ${point.lon.toFixed(5)}`
+
+  );
+
+}
+
+
+/* =====================================================
+   TELEPHONE FICTIF
+===================================================== */
+
+function generatePhone() {
+
+  return (
+
+    "06 " +
+
+    randomInt(10,99) +
+
+    " " +
+
+    randomInt(10,99) +
+
+    " " +
+
+    randomInt(10,99) +
+
+    " " +
+
+    randomInt(10,99)
+
+  );
+
+}
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(date) {
+
+  return (
+
+    date.toLocaleDateString(
+      "fr-FR"
+    )
+
+    +
+
+    " à "
+
+    +
+
+    date.toLocaleTimeString(
+      "fr-FR",
+      {
+        hour: "2-digit",
+        minute: "2-digit"
+      }
+    )
+
+  );
+
+}
+
+
+/* =====================================================
+   NUMERO BON DE COMMANDE
+===================================================== */
+
+function generateNumber() {
+
+  return (
+
+    "BC-" +
+
+    new Date().getFullYear() +
+
+    "-" +
+
+    randomInt(
+      100000,
+      999999
+    )
+
+  );
+
+}
+
+
+/* =====================================================
+   GENERATION
+===================================================== */
+
+async function generateCourse() {
+
+  const buttons =
+    document.querySelectorAll(
+      ".primary"
+    );
+
+
+  buttons.forEach(
+    button => {
+
+      button.disabled =
+        true;
+
+    }
+  );
+
+
+  showStatus(
+    "📍 Récupération de votre position..."
+  );
+
+
+  try {
+
+
+    /* POSITION */
+
+    const position =
+      await getLocation();
+
+
+    showStatus(
+      "🎲 Génération de la course..."
+    );
+
+
+    /*
+      Le départ est situé entre 2 et 7 km
+      de la position actuelle.
+    */
+
+    const distanceDepart =
+      randomNumber(
+        2,
+        7
+      );
+
+
+    /*
+      L'arrivée est située entre 20 et 40 km
+      de la position actuelle.
+    */
+
+    const distanceDestination =
+      randomNumber(
+        20,
+        40
+      );
+
+
+    const departPoint =
+      randomPoint(
+
+        position.lat,
+
+        position.lon,
+
+        distanceDepart
+
+      );
+
+
+    const arriveePoint =
+      randomPoint(
+
+        position.lat,
+
+        position.lon,
+
+        distanceDestination
+
+      );
+
+
+    /*
+      Distance réelle entre départ et arrivée.
+    */
+
+    const distanceReelle =
+      calculateDistanceKm(
+        departPoint,
+        arriveePoint
+      );
+
+
+    showStatus(
+      "🗺️ Recherche des adresses..."
+    );
+
+
+    const [
+      depart,
+      arrivee
+    ] = await Promise.all([
+
+      reverseGeocode(
+        departPoint
+      ),
+
+      reverseGeocode(
+        arriveePoint
+      )
+
+    ]);
+
+
+    /* CLIENT */
+
+    const client =
+
+      randomItem(prenoms)
+
+      +
+
+      " "
+
+      +
+
+      randomItem(noms);
+
+
+    const clientTelephone =
+      generatePhone();
+
+
+    /*
+      HEURE DE GENERATION
+    */
+
+    const generationDate =
+      new Date();
+
+
+    /*
+      HEURE DE COMMANDE CLIENT
+      Entre 5 et 25 minutes AVANT
+      la génération du bon.
+    */
+
+    const minutesAvantCommande =
+      randomInt(
+        5,
+        25
+      );
+
+
+    const commandeDate =
+      new Date(
+        generationDate.getTime()
+        -
+        minutesAvantCommande *
+        60 *
+        1000
+      );
+
+
+    /*
+      PRISE EN CHARGE
+      Entre +20 et +45 minutes
+      après la génération.
+    */
+
+    const minutesAvantPriseEnCharge =
+      randomInt(
+        20,
+        45
+      );
+
+
+    const courseDate =
+      new Date(
+        generationDate.getTime()
+        +
+        minutesAvantPriseEnCharge *
+        60 *
+        1000
+      );
+
+
+    /*
+      TARIF ALEATOIRE
+      ENTRE 2,00 ET 2,50 €/KM
+    */
+
+    const tarifKm =
+      randomNumber(
+        2,
+        2.5
+      );
+
+
+    /*
+      PRIX FINAL
+    */
+
+    const prix =
+      Math.round(
+
+        distanceReelle *
+        tarifKm *
+        100
+
+      ) / 100;
+
+
+    /*
+      INFORMATIONS SAUVEGARDEES
+    */
+
+    const chauffeur =
+      JSON.parse(
+
+        localStorage.getItem(
+          "chauffeur"
+        )
+
+        ||
+
+        "{}"
+
+      );
+
+
+    /* NUMERO */
+
+    document.getElementById(
+      "bonNumero"
+    ).textContent =
+      generateNumber();
+
+
+    /* ENTREPRISE HEADER */
+
+    document.getElementById(
+      "bonEntrepriseHeader"
+    ).textContent =
+
+      chauffeur.entreprise
+      ||
+      "Entreprise VTC";
+
+
+    document.getElementById(
+      "bonAdresseHeader"
+    ).textContent =
+
+      chauffeur.adresse
+      ||
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bonSiretHeader"
+    ).textContent =
+
+      chauffeur.siret
+      ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bonTelephoneHeader"
+    ).textContent =
+
+      chauffeur.telephone
+      ||
+      "Non renseigné";
+
+
+    /* EXPLOITANT */
+
+    document.getElementById(
+      "bEntreprise"
+    ).textContent =
+
+      chauffeur.entreprise
+      ||
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bAdresse"
+    ).textContent =
+
+      chauffeur.adresse
+      ||
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bSiret"
+    ).textContent =
+
+      chauffeur.siret
+      ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bEvtc"
+    ).textContent =
+
+      chauffeur.evtc
+      ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bTelephone"
+    ).textContent =
+
+      chauffeur.telephone
+      ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bEmail"
+    ).textContent =
+
+      chauffeur.email
+      ||
+      "Non renseigné";
+
+
+    /* CHAUFFEUR */
+
+    document.getElementById(
+      "bChauffeur"
+    ).textContent =
+
+      chauffeur.nom
+      ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bCartePro"
+    ).textContent =
+
+      chauffeur.cartePro
+      ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bMarque"
+    ).textContent =
+
+      chauffeur.marque
+      ||
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bModele"
+    ).textContent =
+
+      chauffeur.modele
+      ||
+      "Non renseigné";
+
+
+    document.getElementById(
+      "bCouleur"
+    ).textContent =
+
+      chauffeur.couleur
+      ||
+      "Non renseignée";
+
+
+    document.getElementById(
+      "bImmat"
+    ).textContent =
+
+      chauffeur.immatriculation
+      ||
+      "Non renseignée";
+
+
+    /* CLIENT */
+
+    document.getElementById(
+      "bClient"
+    ).textContent =
+      client;
+
+
+    document.getElementById(
+      "bClientTel"
+    ).textContent =
+      clientTelephone;
+
+
+    /*
+      HEURE DE COMMANDE CLIENT
+      5 à 25 minutes avant génération.
+    */
+
+    document.getElementById(
+      "bCommande"
+    ).textContent =
+      formatDate(
+        commandeDate
+      );
+
+
+    /* TRAJET */
+
+    document.getElementById(
+      "bDepart"
+    ).textContent =
+      depart;
+
+
+    document.getElementById(
+      "bArrivee"
+    ).textContent =
+      arrivee;
+
+
+    /*
+      Prise en charge :
+      +20 à +45 min.
+    */
+
+    document.getElementById(
+      "bCourseDate"
+    ).textContent =
+      formatDate(
+        courseDate
+      );
+
+
+    /*
+      Distance départ → arrivée.
+    */
+
+    document.getElementById(
+      "bDistance"
+    ).textContent =
+
+      distanceReelle.toFixed(2)
+
+      +
+
+      " km";
+
+
+    /* TARIFICATION */
+
+    document.getElementById(
+      "prixDistance"
+    ).textContent =
+
+      distanceReelle.toFixed(2)
+
+      +
+
+      " km";
+
+
+    document.getElementById(
+      "prixKm"
+    ).textContent =
+
+      tarifKm.toFixed(2)
+
+      +
+
+      " € / km";
+
+
+    document.getElementById(
+      "bPrix"
+    ).textContent =
+
+      prix
+        .toFixed(2)
+        .replace(
+          ".",
+          ","
+        );
+
+
+    /* AFFICHAGE */
+
+    document.getElementById(
+      "resultCard"
+    ).classList.remove(
+      "hidden"
+    );
+
+
+    showStatus(
+      "✅ Bon de commande généré.",
+      "success-status"
+    );
+
+
+    document.getElementById(
+      "resultCard"
+    ).scrollIntoView({
+
+      behavior:
+        "smooth",
+
+      block:
+        "start"
+
+    });
+
+
+  }
+
+
+  catch(error) {
+
+    console.error(error);
+
+
+    let message =
+      "❌ Impossible de générer la course.";
+
+
+    if (
+      error.code === 1
+    ) {
+
+      message =
+        "❌ Localisation refusée. Autorisez la géolocalisation dans votre navigateur.";
+
+    }
+
+
+    if (
+      error.code === 2
+    ) {
+
+      message =
+        "❌ Position impossible à déterminer.";
+
+    }
+
+
+    if (
+      error.code === 3
+    ) {
+
+      message =
+        "❌ La récupération de votre position a expiré.";
+
+    }
+
+
+    showStatus(
+      message,
+      "error"
+    );
+
+  }
+
+
+  finally {
+
+    buttons.forEach(
+      button => {
+
+        button.disabled =
+          false;
+
+      }
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   INITIALISATION
+===================================================== */
+
+loadDriver();
+
+</script>
+
+</body>
+</html>
