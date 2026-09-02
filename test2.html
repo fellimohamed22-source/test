@@ -801,22 +801,6 @@ button:disabled {
 
     </div>
 
-
-    <div>
-
-      <label for="couleur">
-        Couleur
-      </label>
-
-      <input
-        id="couleur"
-        type="text"
-        placeholder="Noir"
-      >
-
-    </div>
-
-
     <div>
 
       <label for="immatriculation">
@@ -1250,17 +1234,7 @@ button:disabled {
       </div>
 
 
-      <div class="driver-row">
-
-        <strong>
-          Couleur
-        </strong>
-
-        <span id="bCouleur">
-          -
-        </span>
-
-      </div>
+     
 
 
       <div class="driver-row">
@@ -1490,10 +1464,7 @@ function saveDriver() {
         "modele"
       ).value.trim(),
 
-    couleur:
-      document.getElementById(
-        "couleur"
-      ).value.trim(),
+ 
 
     immatriculation:
       document.getElementById(
@@ -1572,8 +1543,7 @@ function loadDriver() {
       modele:
         data.modele,
 
-      couleur:
-        data.couleur,
+   
 
       immatriculation:
         data.immatriculation
@@ -2509,14 +2479,7 @@ async function generateCourse() {
       "Non renseigné";
 
 
-    document.getElementById(
-      "bCouleur"
-    ).textContent =
-
-      chauffeur.couleur
-      ||
-      "Non renseignée";
-
+  
 
     document.getElementById(
       "bImmat"
